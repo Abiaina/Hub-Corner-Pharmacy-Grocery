@@ -15,6 +15,10 @@
    - Scroll down to "Pages" section
    - Under "Source", select "GitHub Actions"
    - Save the settings
+   
+   **Important:** Make sure you have the `github-pages` environment enabled:
+   - Go to Settings → Environments
+   - If you don't see "github-pages", it will be created automatically on first deployment
 
 3. **Automatic Deployment:**
    - The GitHub Actions workflow will automatically run
@@ -76,9 +80,27 @@ The static files will be generated in the `out/` directory, which you can serve 
 - Verify Next.js configuration in `next.config.mjs`
 
 ### Deployment Issues
-- Check GitHub Actions logs in the "Actions" tab
-- Ensure GitHub Pages is enabled in repository settings
-- Verify the workflow file is in `.github/workflows/deploy.yml`
+
+**Common Fixes:**
+
+1. **Git Error (Exit Code 128):**
+   - Make sure GitHub Pages is enabled: Settings → Pages → Source: "GitHub Actions"
+   - Check that the `github-pages` environment exists: Settings → Environments
+   - Verify repository permissions allow GitHub Actions to write to Pages
+
+2. **Build Failures:**
+   - Check the "Actions" tab for detailed error logs
+   - Ensure all dependencies are in `package.json`
+   - Verify Next.js configuration in `next.config.mjs`
+
+3. **Permission Issues:**
+   - Go to Settings → Actions → General
+   - Under "Workflow permissions", select "Read and write permissions"
+   - Check "Allow GitHub Actions to create and approve pull requests"
+
+4. **Environment Setup:**
+   - The `github-pages` environment will be created automatically
+   - If it doesn't appear, try pushing a new commit to trigger the workflow
 
 ### Data Loading Issues
 - Ensure JSON data files are in `/public/data/` directory
