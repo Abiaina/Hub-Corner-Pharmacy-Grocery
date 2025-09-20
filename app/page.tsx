@@ -2,48 +2,39 @@ export default function Page() {
   return (
     <div className="space-y-6">
       <section className="card">
-        <h1 className="text-3xl font-semibold mb-4">Reimagining Grocery + Pharmacy Access in Seattle</h1>
+        <h1 className="text-3xl font-semibold mb-4">Hub-Spoke Model for Community Access</h1>
         <p className="text-lg text-gray-700 mb-6">
-          A comprehensive analysis of food and pharmacy access patterns across Seattle, comparing historical data with current conditions and proposing innovative solutions through repurposed large pharmacies as hubs and corner store-pharmacy hybrids.
+          A conceptual framework for improving food and pharmacy access through repurposed large pharmacies as community hubs 
+          and corner store-pharmacy hybrids, creating a sustainable network that serves underserved communities.
         </p>
         
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Explore the Data</h2>
+            <h2 className="text-xl font-semibold">Model Overview</h2>
             <div className="space-y-3">
-              <a href="/seattle-2015-2025" className="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                <h3 className="font-semibold text-blue-800">2015 ↔ 2025 Map</h3>
-                <p className="text-sm text-blue-600">Interactive comparison of access patterns across Seattle census tracts</p>
+              <a href="/pilot" className="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
+                <h3 className="font-semibold text-purple-800">Hub-Spoke Framework</h3>
+                <p className="text-sm text-purple-600">Core concept and implementation strategy</p>
               </a>
               
-              <a href="/pilot" className="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
-                <h3 className="font-semibold text-purple-800">Proposed Pilot</h3>
-                <p className="text-sm text-purple-600">Hub-and-spoke model for improved community access</p>
+              <a href="/ppp" className="block p-4 bg-amber-50 rounded-lg hover:bg-amber-100 transition-colors">
+                <h3 className="font-semibold text-amber-800">Partnership Strategy</h3>
+                <p className="text-sm text-amber-600">Public-private partnerships and supply chain innovations</p>
               </a>
             </div>
           </div>
           
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Learn More</h2>
+            <h2 className="text-xl font-semibold">Research & Examples</h2>
             <div className="space-y-3">
               <a href="/examples" className="block p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
-                <h3 className="font-semibold text-green-800">Examples Elsewhere</h3>
-                <p className="text-sm text-green-600">Successful models from other cities and communities</p>
+                <h3 className="font-semibold text-green-800">State Examples</h3>
+                <p className="text-sm text-green-600">Successful models from other states and communities</p>
               </a>
               
-              <a href="/ppp" className="block p-4 bg-amber-50 rounded-lg hover:bg-amber-100 transition-colors">
-                <h3 className="font-semibold text-amber-800">PPP & Supply Chain</h3>
-                <p className="text-sm text-amber-600">Partnership strategies and supply chain innovations</p>
-              </a>
-              
-              <a href="/dashboard" className="block p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors">
-                <h3 className="font-semibold text-indigo-800">Network Dashboard</h3>
-                <p className="text-sm text-indigo-600">Real-time inventory, pricing, and order tracking</p>
-              </a>
-              
-              <a href="/grocery-stores" className="block p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors">
-                <h3 className="font-semibold text-orange-800">Grocery Store Directory</h3>
-                <p className="text-sm text-orange-600">Worker types, union status, and employment details</p>
+              <a href="/references" className="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                <h3 className="font-semibold text-blue-800">References</h3>
+                <p className="text-sm text-blue-600">Research, case studies, and policy documentation</p>
               </a>
             </div>
           </div>
@@ -51,35 +42,48 @@ export default function Page() {
       </section>
 
       <section className="card">
-        <h2 className="text-xl font-semibold mb-4">Key Findings</h2>
+        <h2 className="text-xl font-semibold mb-4">Hub-Spoke Model Components</h2>
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="text-center p-4 bg-red-50 rounded-lg">
-            <div className="text-3xl font-bold text-red-600 mb-2">23%</div>
-            <div className="text-sm text-gray-600">of Seattle census tracts lack both grocery and pharmacy access</div>
-          </div>
-          
-          <div className="text-center p-4 bg-blue-50 rounded-lg">
-            <div className="text-3xl font-bold text-blue-600 mb-2">45%</div>
-            <div className="text-sm text-gray-600">improvement in access with proposed hub-and-spoke model</div>
+          <div className="text-center p-4 bg-purple-50 rounded-lg">
+            <div className="text-2xl font-bold text-purple-600 mb-2">🏥</div>
+            <div className="font-semibold text-purple-800 mb-2">Community Hubs</div>
+            <div className="text-sm text-gray-600">Repurposed large pharmacies serving as central distribution and service points</div>
           </div>
           
           <div className="text-center p-4 bg-green-50 rounded-lg">
-            <div className="text-3xl font-bold text-green-600 mb-2">85%</div>
-            <div className="text-sm text-gray-600">of population would be within 1 mile of services</div>
+            <div className="text-2xl font-bold text-green-600 mb-2">🏪</div>
+            <div className="font-semibold text-green-800 mb-2">Corner Store Hybrids</div>
+            <div className="text-sm text-gray-600">Existing corner stores enhanced with pharmacy services and fresh food</div>
+          </div>
+          
+          <div className="text-center p-4 bg-blue-50 rounded-lg">
+            <div className="text-2xl font-bold text-blue-600 mb-2">🚚</div>
+            <div className="font-semibold text-blue-800 mb-2">Distribution Network</div>
+            <div className="text-sm text-gray-600">Efficient supply chain connecting hubs to corner stores and communities</div>
           </div>
         </div>
       </section>
 
       <section className="card">
-        <h2 className="text-xl font-semibold mb-4">About This Project</h2>
+        <h2 className="text-xl font-semibold mb-4">About This Framework</h2>
         <p className="text-gray-700 mb-4">
-          This interactive platform provides data-driven insights into food and pharmacy access across Seattle neighborhoods. 
-          By comparing historical patterns with current conditions, we can identify gaps and opportunities for improvement.
+          The hub-spoke model represents an innovative approach to addressing food and pharmacy access disparities 
+          in underserved communities. By leveraging existing infrastructure and creating strategic partnerships, 
+          this model can provide sustainable solutions that benefit both communities and businesses.
         </p>
-        <p className="text-gray-700">
-          The proposed model represents a comprehensive approach to addressing access disparities through 
-          repurposing closed large pharmacies as community hubs and integrating pharmacy services into existing corner stores, 
-          creating a sustainable and community-centered solution.
+        <p className="text-gray-700 mb-4">
+          <strong>Key Principles:</strong>
+        </p>
+        <ul className="list-disc list-inside text-gray-700 space-y-2">
+          <li>Repurpose existing large pharmacy spaces as community hubs</li>
+          <li>Enhance corner stores with pharmacy services and fresh food options</li>
+          <li>Create efficient distribution networks between hubs and spokes</li>
+          <li>Develop sustainable public-private partnerships</li>
+          <li>Focus on community-centered design and local ownership</li>
+        </ul>
+        <p className="text-gray-700 mt-4">
+          This framework draws from successful models implemented in other states and communities, 
+          adapted for local needs and regulatory environments.
         </p>
       </section>
     </div>
