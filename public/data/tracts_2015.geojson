@@ -1,0 +1,65 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "53033000100",
+        "has_grocery": false,
+        "has_pharmacy": false,
+        "population": 2847,
+        "median_income": 45230
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.3321, 47.6062],
+          [-122.3300, 47.6062],
+          [-122.3300, 47.6080],
+          [-122.3321, 47.6080],
+          [-122.3321, 47.6062]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "53033000200",
+        "has_grocery": true,
+        "has_pharmacy": true,
+        "population": 3201,
+        "median_income": 67890
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.3300, 47.6062],
+          [-122.3280, 47.6062],
+          [-122.3280, 47.6080],
+          [-122.3300, 47.6080],
+          [-122.3300, 47.6062]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "53033000300",
+        "has_grocery": false,
+        "has_pharmacy": true,
+        "population": 2156,
+        "median_income": 38920
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.3280, 47.6062],
+          [-122.3260, 47.6062],
+          [-122.3260, 47.6080],
+          [-122.3280, 47.6080],
+          [-122.3280, 47.6062]
+        ]]
+      }
+    }
+  ]
+}
