@@ -37,25 +37,24 @@
 - Builds the Next.js app on every push to main branch
 - Deploys static files to GitHub Pages
 
-### New Pages
-- **Homepage** (`/`) - Overview of the project
-- **Grocery Stores Directory** (`/grocery-stores`) - Interactive directory showing:
-  - Worker types (union, co-op, non-unionized)
-  - Employment details and benefits
-  - Store status and quality ratings
-  - Filtering by worker type
+### Site Pages
+- **Homepage** (`/`) - Overview of the hub-spoke model concept
+- **Hub-Spoke Framework** (`/pilot`) - Detailed implementation strategy
+- **State Examples** (`/examples`) - Successful models from other states
+- **References** (`/references`) - Research and policy documentation
 
 ## Features
 
-### Grocery Store Directory Page
-- **Interactive filtering** by worker type
-- **Color-coded badges** for easy identification
-- **Comprehensive data** including:
-  - Union affiliations (UFCW 3000, UFCW Local 21)
-  - Employee counts
-  - Benefits information
-  - Store quality ratings
-  - Status (open, closing, etc.)
+### Hub-Spoke Model Framework
+- **Conceptual overview** of the community access model
+- **Implementation strategy** with flexible hub configurations
+- **Partnership approaches** for sustainable development
+
+### State Examples & Research
+- **Comprehensive case studies** from successful programs
+- **Academic research** on food access and health outcomes
+- **Policy documentation** and implementation guides
+- **Economic models** and partnership strategies
 
 ### Responsive Design
 - Works on desktop, tablet, and mobile

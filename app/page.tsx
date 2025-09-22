@@ -8,36 +8,30 @@ export default function Page() {
           and corner store-pharmacy hybrids, creating a sustainable network that serves underserved communities.
         </p>
         
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Model Overview</h2>
-            <div className="space-y-3">
-              <a href="/pilot" className="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
-                <h3 className="font-semibold text-purple-800">Hub-Spoke Framework</h3>
-                <p className="text-sm text-purple-600">Core concept and implementation strategy</p>
-              </a>
-              
-              <a href="/ppp" className="block p-4 bg-amber-50 rounded-lg hover:bg-amber-100 transition-colors">
-                <h3 className="font-semibold text-amber-800">Partnership Strategy</h3>
-                <p className="text-sm text-amber-600">Public-private partnerships and supply chain innovations</p>
-              </a>
+        <div className="grid md:grid-cols-3 gap-6">
+          <a href="/pilot" className="block p-6 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-purple-600 mb-3">🏥</div>
+              <h3 className="font-semibold text-purple-800 text-lg mb-2">Hub-Spoke Framework</h3>
+              <p className="text-sm text-purple-600">Core concept and implementation strategy for community access</p>
             </div>
-          </div>
+          </a>
           
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Research & Examples</h2>
-            <div className="space-y-3">
-              <a href="/examples" className="block p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
-                <h3 className="font-semibold text-green-800">State Examples</h3>
-                <p className="text-sm text-green-600">Successful models from other states and communities</p>
-              </a>
-              
-              <a href="/references" className="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                <h3 className="font-semibold text-blue-800">References</h3>
-                <p className="text-sm text-blue-600">Research, case studies, and policy documentation</p>
-              </a>
+          <a href="/examples" className="block p-6 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-green-600 mb-3">🌍</div>
+              <h3 className="font-semibold text-green-800 text-lg mb-2">State Examples</h3>
+              <p className="text-sm text-green-600">Successful models from other states and communities</p>
             </div>
-          </div>
+          </a>
+          
+          <a href="/references" className="block p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-600 mb-3">📚</div>
+              <h3 className="font-semibold text-blue-800 text-lg mb-2">References</h3>
+              <p className="text-sm text-blue-600">Research, case studies, and policy documentation</p>
+            </div>
+          </a>
         </div>
       </section>
 
