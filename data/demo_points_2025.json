@@ -1,0 +1,55 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Demo Grocery Store"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.319, 47.619]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Demo Pharmacy"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.335, 47.608]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Demo Farmers Market"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.325, 47.602]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Another Grocery Store"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.340, 47.615]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Community Pharmacy"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.310, 47.605]
+      }
+    }
+  ]
+}

@@ -1,0 +1,270 @@
+{
+    "city": "Seattle, WA",
+    "as_of": "2025-09-20",
+    "entities": [
+      {
+        "id": "groc_qfc_ballard",
+        "name": "QFC - Ballard",
+        "type": "grocery_chain",
+        "address": "5700 24th Ave NW, Seattle, WA 98107",
+        "coordinates": { "lat": 47.6709, "lng": -122.3876 },
+        "neighborhood": "Ballard",
+        "years_present": [2015, 2020, 2025],
+        "status_2025": "open",
+        "quality_tier": "A-",
+        "quality_notes": "Full grocer, butcher, deli; mid pricing",
+        "employment_model": {
+          "ownership": "corporate",
+          "worker_type": "union",
+          "unionized": true,
+          "union_affiliation": "UFCW 3000",
+          "employee_count": "25-50",
+          "benefits": "health_insurance, retirement, paid_time_off"
+        },
+        "tags": ["full_grocer", "union", "corporate"]
+      },
+      {
+        "id": "groc_safeway_roosevelt",
+        "name": "Safeway - Roosevelt",
+        "type": "grocery_chain",
+        "address": "7300 Roosevelt Way NE, Seattle, WA 98115",
+        "coordinates": { "lat": 47.6822, "lng": -122.3175 },
+        "neighborhood": "Roosevelt",
+        "years_present": [2015, 2020, 2025],
+        "status_2025": "open",
+        "quality_tier": "A-",
+        "quality_notes": "Full grocer, butcher/deli; variable produce quality",
+        "employment_model": {
+          "ownership": "corporate",
+          "worker_type": "union",
+          "unionized": true,
+          "union_affiliation": "UFCW 3000",
+          "employee_count": "25-50",
+          "benefits": "health_insurance, retirement, paid_time_off"
+        },
+        "tags": ["full_grocer", "union", "corporate"]
+      },
+      {
+        "id": "groc_fredmeyer_lakecity",
+        "name": "Fred Meyer - Lake City",
+        "type": "grocery_chain",
+        "address": "13000 Lake City Way NE, Seattle, WA 98125",
+        "coordinates": { "lat": 47.722992, "lng": -122.292937 },
+        "neighborhood": "Lake City",
+        "years_present": [2015, 2020, 2025],
+        "status_2025": "closing_oct_17_2025",
+        "quality_tier": "A-",
+        "quality_notes": "Large selection, butcher, mid pricing",
+        "employment_model": {
+          "ownership": "corporate",
+          "worker_type": "union",
+          "unionized": true,
+          "union_affiliation": "UFCW 3000",
+          "employee_count": "50-100",
+          "benefits": "health_insurance, retirement, paid_time_off"
+        },
+        "tags": ["full_grocer", "union", "corporate", "closing_2025"]
+      },
+      {
+        "id": "groc_pcc_greenlake",
+        "name": "PCC Community Markets - Green Lake",
+        "type": "grocery_coop",
+        "address": "7504 Aurora Ave N, Seattle, WA 98103",
+        "coordinates": { "lat": 47.6833, "lng": -122.3448 },
+        "neighborhood": "Green Lake",
+        "years_present": [2015, 2020, 2025],
+        "status_2025": "open",
+        "quality_tier": "A",
+        "quality_notes": "High-quality organic/fresh; premium pricing",
+        "employment_model": {
+          "ownership": "co-op",
+          "worker_type": "co-op",
+          "unionized": true,
+          "union_affiliation": "UFCW Local 21",
+          "employee_count": "25-50",
+          "benefits": "health_insurance, retirement, paid_time_off, member_discounts"
+        },
+        "tags": ["coop", "organic", "union", "member_owned"]
+      },
+      {
+        "id": "groc_traderjoes_capitolhill",
+        "name": "Trader Joe's - Capitol Hill",
+        "type": "grocery_chain",
+        "address": "1700 E Madison St, Seattle, WA 98122",
+        "coordinates": { "lat": 47.6156, "lng": -122.3103 },
+        "neighborhood": "Capitol Hill",
+        "years_present": [2015, 2020, 2025],
+        "status_2025": "open",
+        "quality_tier": "B+",
+        "quality_notes": "Good value; no butcher/seafood; some recalls",
+        "employment_model": {
+          "ownership": "corporate",
+          "worker_type": "non-unionized",
+          "unionized": false,
+          "employee_count": "15-25",
+          "benefits": "health_insurance, retirement, paid_time_off"
+        },
+        "tags": ["value", "limited_fresh", "nonunion", "corporate"]
+      },
+      {
+        "id": "groc_groceryoutlet_sodo",
+        "name": "Grocery Outlet - SoDo",
+        "type": "grocery_chain",
+        "address": "1700 4th Ave S, Seattle, WA 98134",
+        "coordinates": { "lat": 47.5877, "lng": -122.3299 },
+        "neighborhood": "SoDo",
+        "years_present": [2015, 2020, 2025],
+        "status_2025": "open",
+        "quality_tier": "B",
+        "quality_notes": "Lowest prices, no butcher, variable fresh, higher recall exposure",
+        "employment_model": {
+          "ownership": "franchise",
+          "worker_type": "non-unionized",
+          "unionized": false,
+          "employee_count": "10-20",
+          "benefits": "limited_benefits"
+        },
+        "tags": ["discount", "franchise", "recall_exposure", "nonunion"]
+      },
+      {
+        "id": "groc_wholefoods_slu",
+        "name": "Whole Foods - South Lake Union",
+        "type": "grocery_chain",
+        "address": "2210 Westlake Ave, Seattle, WA 98121",
+        "coordinates": { "lat": 47.6186, "lng": -122.3381 },
+        "neighborhood": "South Lake Union",
+        "years_present": [2015, 2020, 2025],
+        "status_2025": "open",
+        "quality_tier": "A",
+        "quality_notes": "Premium fresh/organic; higher pricing",
+        "employment_model": {
+          "ownership": "corporate",
+          "worker_type": "non-unionized",
+          "unionized": false,
+          "employee_count": "25-50",
+          "benefits": "health_insurance, retirement, paid_time_off, employee_discount"
+        },
+        "tags": ["premium", "organic", "nonunion", "corporate"]
+      },
+      {
+        "id": "groc_uwajimaya_id",
+        "name": "Uwajimaya - International District",
+        "type": "grocery_independent",
+        "address": "600 5th Ave S, Seattle, WA 98104",
+        "coordinates": { "lat": 47.5972, "lng": -122.3272 },
+        "neighborhood": "International District",
+        "years_present": [2015, 2020, 2025],
+        "status_2025": "open",
+        "quality_tier": "A",
+        "quality_notes": "Strong produce/seafood, Asian specialty",
+        "employment_model": {
+          "ownership": "independent",
+          "worker_type": "non-unionized",
+          "unionized": false,
+          "employee_count": "25-50",
+          "benefits": "health_insurance, retirement, paid_time_off"
+        },
+        "tags": ["specialty", "independent", "nonunion"]
+      },
+      {
+        "id": "pharm_bartell_central",
+        "name": "Bartell Drugs - Central District",
+        "type": "pharmacy_chain",
+        "address": "1201 Madison St, Seattle, WA 98104",
+        "coordinates": { "lat": 47.6105, "lng": -122.3232 },
+        "neighborhood": "Central District",
+        "years_present": [2015, 2020, 2025],
+        "status_2025": "shrinking_converting",
+        "employment_model": {
+          "ownership": "corporate",
+          "worker_type": "union",
+          "unionized": true,
+          "union_affiliation": "UFCW 3000",
+          "employee_count": "5-15",
+          "benefits": "health_insurance, retirement, paid_time_off"
+        },
+        "tags": ["pharmacy", "union", "conversion", "corporate"]
+      },
+      {
+        "id": "pharm_riteaid_wedgwood",
+        "name": "Rite Aid - Wedgwood",
+        "type": "pharmacy_chain",
+        "address": "8500 35th Ave NE, Seattle, WA 98115",
+        "coordinates": { "lat": 47.6904, "lng": -122.2915 },
+        "neighborhood": "Wedgwood",
+        "years_present": [2015, 2020, 2025],
+        "status_2025": "closing_2025",
+        "employment_model": {
+          "ownership": "corporate",
+          "worker_type": "non-unionized",
+          "unionized": false,
+          "employee_count": "5-15",
+          "benefits": "health_insurance, retirement, paid_time_off"
+        },
+        "tags": ["pharmacy", "closure_2025", "nonunion", "corporate"]
+      },
+      {
+        "id": "pharm_walgreens_downtown",
+        "name": "Walgreens - Downtown",
+        "type": "pharmacy_chain",
+        "address": "1416 2nd Ave, Seattle, WA 98101",
+        "coordinates": { "lat": 47.6092, "lng": -122.3382 },
+        "neighborhood": "Downtown",
+        "years_present": [2015, 2020, 2025],
+        "status_2025": "open",
+        "employment_model": {
+          "ownership": "corporate",
+          "worker_type": "non-unionized",
+          "unionized": false,
+          "employee_count": "5-15",
+          "benefits": "health_insurance, retirement, paid_time_off"
+        },
+        "tags": ["pharmacy", "corporate", "nonunion"]
+      },
+      {
+        "id": "fm_udistrict",
+        "name": "University District Farmers Market",
+        "type": "farmers_market",
+        "address": "University Way NE between NE 50th & NE 52nd Streets, Seattle, WA 98105",
+        "coordinates": { "lat": 47.6623, "lng": -122.3134 },
+        "neighborhood": "University District",
+        "years_present": [2015, 2020, 2025],
+        "status_2025": "year_round",
+        "quality_tier": "A",
+        "employment_model": {
+          "ownership": "nonprofit",
+          "worker_type": "non-unionized",
+          "unionized": false,
+          "employee_count": "2-5",
+          "benefits": "limited_benefits"
+        },
+        "tags": ["fresh", "weekly", "nonprofit", "nonunion"]
+      },
+      {
+        "id": "fm_capitolhill",
+        "name": "Capitol Hill Farmers Market",
+        "type": "farmers_market",
+        "address": "E Denny Way & Broadway, Seattle, WA 98122",
+        "coordinates": { "lat": 47.6184, "lng": -122.3206 },
+        "neighborhood": "Capitol Hill",
+        "years_present": [2015, 2020, 2025],
+        "status_2025": "year_round_plus_tuesday",
+        "quality_tier": "A",
+        "employment_model": {
+          "ownership": "nonprofit",
+          "worker_type": "non-unionized",
+          "unionized": false,
+          "employee_count": "2-5",
+          "benefits": "limited_benefits"
+        },
+        "tags": ["fresh", "weekly", "nonprofit", "nonunion"]
+      }
+    ],
+    "quality_rubric": {
+      "A": "Full fresh access, butcher/seafood, consistent, higher quality",
+      "A-": "Full service but variable quality/cost",
+      "B+": "Value or niche stores; no butcher/seafood",
+      "B": "Lowest prices; limited or inconsistent fresh"
+    }
+  }
+  

@@ -1,0 +1,176 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "hub_001",
+        "site_name": "Central Hub - Capitol Hill",
+        "buffer_type": "quarter_mile",
+        "distance": 0.25
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.3200, 47.6200],
+          [-122.3150, 47.6200],
+          [-122.3150, 47.6250],
+          [-122.3200, 47.6250],
+          [-122.3200, 47.6200]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "hub_001",
+        "site_name": "Central Hub - Capitol Hill",
+        "buffer_type": "half_mile",
+        "distance": 0.5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.3200, 47.6200],
+          [-122.3100, 47.6200],
+          [-122.3100, 47.6300],
+          [-122.3200, 47.6300],
+          [-122.3200, 47.6200]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "hub_001",
+        "site_name": "Central Hub - Capitol Hill",
+        "buffer_type": "one_mile",
+        "distance": 1.0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.3200, 47.6200],
+          [-122.3000, 47.6200],
+          [-122.3000, 47.6400],
+          [-122.3200, 47.6400],
+          [-122.3200, 47.6200]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "hub_002",
+        "site_name": "North Hub - Greenwood",
+        "buffer_type": "quarter_mile",
+        "distance": 0.25
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.3600, 47.6900],
+          [-122.3550, 47.6900],
+          [-122.3550, 47.6950],
+          [-122.3600, 47.6950],
+          [-122.3600, 47.6900]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "hub_002",
+        "site_name": "North Hub - Greenwood",
+        "buffer_type": "half_mile",
+        "distance": 0.5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.3600, 47.6900],
+          [-122.3500, 47.6900],
+          [-122.3500, 47.7000],
+          [-122.3600, 47.7000],
+          [-122.3600, 47.6900]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "hub_002",
+        "site_name": "North Hub - Greenwood",
+        "buffer_type": "one_mile",
+        "distance": 1.0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.3600, 47.6900],
+          [-122.3400, 47.6900],
+          [-122.3400, 47.7100],
+          [-122.3600, 47.7100],
+          [-122.3600, 47.6900]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "hub_003",
+        "site_name": "South Hub - Rainier Valley",
+        "buffer_type": "quarter_mile",
+        "distance": 0.25
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.2900, 47.5500],
+          [-122.2850, 47.5500],
+          [-122.2850, 47.5550],
+          [-122.2900, 47.5550],
+          [-122.2900, 47.5500]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "hub_003",
+        "site_name": "South Hub - Rainier Valley",
+        "buffer_type": "half_mile",
+        "distance": 0.5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.2900, 47.5500],
+          [-122.2800, 47.5500],
+          [-122.2800, 47.5600],
+          [-122.2900, 47.5600],
+          [-122.2900, 47.5500]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "hub_003",
+        "site_name": "South Hub - Rainier Valley",
+        "buffer_type": "one_mile",
+        "distance": 1.0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.2900, 47.5500],
+          [-122.2700, 47.5500],
+          [-122.2700, 47.5700],
+          [-122.2900, 47.5700],
+          [-122.2900, 47.5500]
+        ]]
+      }
+    }
+  ]
+}
