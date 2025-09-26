@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lake City Service Area Analysis</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #2563eb, #7c3aed);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 999;
+        }
+        
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        
+        .header p {
+            margin: 0 0 15px 0;
+            opacity: 0.9;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .header-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        .header-nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        
+        .legend {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            min-width: 200px;
+            max-width: 250px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .legend h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+        
+        .legend-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .controls {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            min-width: 250px;
+            max-width: 300px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .controls h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 1rem;
+        }
+        
+        .scenario-group {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            background: #f9fafb;
+        }
+        
+        .scenario-group h4 {
+            margin: 0 0 8px 0;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+        
+        .control-group {
+            margin: 8px 0;
+        }
+        
+        .control-group label {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .control-group input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        
+        .impact-stats {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+        
+        .impact-stats h4 {
+            margin: 0 0 5px 0;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        
+        .impact-stats p {
+            margin: 3px 0;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .location-list {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .location-list h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+        }
+        
+        .location-categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .location-category {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .location-category h4 {
+            margin: 0 0 10px 0;
+            color: #555;
+            font-size: 1rem;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #d1d5db;
+        }
+        
+        .location-category ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .location-category li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.9rem;
+            color: #666;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .location-category li:before {
+            content: "•";
+            color: #0ea5e9;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .location-category li:last-child {
+            border-bottom: none;
+        }
+        
+        .address-form {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f0f9ff;
+            border-radius: 8px;
+            border: 2px solid #0ea5e9;
+        }
+        
+        .address-form h3 {
+            margin: 0 0 15px 0;
+            color: #0c4a6e;
+        }
+        
+        .form-group {
+            margin: 15px 0;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        
+        .address-form button {
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .address-form button:hover {
+            background: #0284c7;
+        }
+        
+        /* Responsive design to prevent overlapping */
+        @media (max-width: 1400px) {
+            .legend {
+                top: 100px;
+                max-width: 220px;
+            }
+            
+            .controls {
+                top: 100px;
+                max-width: 280px;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .legend {
+                top: 120px;
+                max-width: 200px;
+            }
+            
+            .controls {
+                top: 120px;
+                max-width: 250px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .legend {
+                top: 140px;
+                max-width: 180px;
+            }
+            
+            .controls {
+                top: 140px;
+                max-width: 220px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .legend {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin: 10px;
+                max-width: none;
+                min-width: auto;
+            }
+            
+            .controls {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 10px;
+                max-width: none;
+                min-width: auto;
+            }
+            
+            #map {
+                height: 60vh;
+            }
+            
+            .header {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .legend {
+                margin: 5px;
+                padding: 10px;
+            }
+            
+            .controls {
+                margin: 5px;
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            
+            .header p {
+                font-size: 0.8rem;
+            }
+        }
+        
+        .controls-header, .legend-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .collapse-btn {
+            background: #6b7280;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .collapse-btn:hover {
+            background: #4b5563;
+        }
+        
+        .controls-content, .legend-content {
+            transition: max-height 0.3s ease-out;
+            overflow: hidden;
+        }
+        
+        .controls-content.collapsed, .legend-content.collapsed {
+            max-height: 0;
+        }
+        
+        .info {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            max-width: 300px;
+        }
+        
+        .info h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 1rem;
+        }
+        
+        .info p {
+            margin: 5px 0;
+            font-size: 0.85rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Lake City Service Area Analysis</h1>
+        <p>Visualize the service of grocery and pharmacy access comparison</p>
+        <div class="header-nav">
+            <a href="/">Home</a>
+            <a href="/enhanced-map.html">Map Analysis</a>
+            <a href="/solutions.html">Solutions</a>
+            <a href="/references.html">References</a>
+        </div>
+    </div>
+    
+    <div id="map"></div>
+    
+    <div class="legend">
+        <div class="legend-header">
+            <h3>Map Legend</h3>
+            <button class="collapse-btn" onclick="toggleLegend()">−</button>
+        </div>
+        
+        <div class="legend-content" id="legendContent">
+        
+        <h4 style="margin: 10px 0 5px 0; color: #333; font-size: 0.9rem;">Potential Sites</h4>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #f59e0b;"></div>
+            <span class="legend-text">Potential Sites (Community centers, vacant buildings)</span>
+        </div>
+        
+        <div class="legend-item">
+            <div class="legend-color" style="background: #fecaca; border: 3px solid #dc2626;"></div>
+            <span class="legend-text">Lake City Area (Potential Desert Analysis)</span>
+        </div>
+        
+        <h4 style="margin: 15px 0 5px 0; color: #333; font-size: 0.9rem;">Services</h4>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #059669; border-radius: 50%;"></div>
+            <span class="legend-text">Grocery Store</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #7c3aed; border-radius: 50%;"></div>
+            <span class="legend-text">Pharmacy</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #f59e0b; border-radius: 50%;"></div>
+            <span class="legend-text">Proposed Solution</span>
+        </div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <div class="controls-header">
+            <h3>Scenario Controls</h3>
+            <button class="collapse-btn" onclick="toggleControls()">−</button>
+        </div>
+        
+        <div class="controls-content" id="controlsContent">
+            <div class="scenario-group">
+                <h4>Baseline Scenario</h4>
+                <div class="control-group">
+                    <label>
+                        <input type="checkbox" id="baselineGroceriesToggle">
+                        Baseline Groceries (Fred Meyer + Safeway)
+                    </label>
+                </div>
+                <div class="control-group">
+                    <label>
+                        <input type="checkbox" id="baselinePharmaciesToggle">
+                        Baseline Pharmacies (Fred Meyer + Walgreens + Bartells + Rite Aid)
+                    </label>
+                </div>
+            </div>
+        
+        <div class="scenario-group">
+            <h4>Current State</h4>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="currentGroceriesToggle" checked>
+                    Current Groceries (Safeway)
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="currentPharmaciesToggle" checked>
+                    Current Pharmacies (Rite Aid)
+                </label>
+            </div>
+            <p style="font-size: 0.8rem; color: #888; margin: 5px 0;">
+                Service radius circles appear automatically for visible services
+            </p>
+        </div>
+        
+        <div class="scenario-group">
+            <h4>Pharmacy Solutions</h4>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="additionalPharmaciesToggle">
+                    Additional Pharmacies (QFC Lake City)
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="interimPharmacyToggle">
+                    Interim Pharmacies (Neighborcare + Bartell)
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="mobilePharmacyToggle">
+                    Mobile Pharmacy (Lake City Library)
+                </label>
+            </div>
+        </div>
+        
+        <div class="scenario-group">
+            <h4>Grocery Solutions</h4>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="additionalGroceriesToggle">
+                    Additional Grocery Stores (QFC, PCC, Trader Joe's, Whole Foods, Uwajimaya)
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="pccCoopToggle">
+                    PCC/Co-op Grocery Store
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="cornerStoreToggle">
+                    Corner Store Solutions (Fred Meyer + Bartell sites)
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="farmersMarketsToggle">
+                    Farmers Markets (Lake City, U-District, Capitol Hill)
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="smallGroceriesToggle">
+                    Small Grocery Stores (Neighborhood stores)
+                </label>
+            </div>
+        </div>
+        
+        <div class="scenario-group">
+            <h4>Potential Sites</h4>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="potentialSitesToggle">
+                    Potential Sites (Community centers, vacant buildings, etc.)
+                </label>
+            </div>
+        </div>
+        
+        <div class="scenario-group">
+            <h4>Recently Closed pharmacy and grocery sites</h4>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="closedStoresToggle">
+                    Fred Meyer, Walgreens, Bartells
+                </label>
+            </div>
+        </div>
+        
+        <div class="scenario-group">
+            <h4>Interim Pharmacy sites</h4>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="neighborcareToggle">
+                    Neighborcare
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="bartellToggle">
+                    Bartell
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="libraryToggle">
+                    Lake City Library
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="bankToggle">
+                    Old Bank
+                </label>
+            </div>
+        </div>
+        
+        <div class="scenario-group">
+            <h4>Proposed Grocery Sites</h4>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="fredMeyerToggle">
+                    Fred Meyer
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="spokeModelToggle">
+                    Spoke Model sites: Bartell, Walgreens, Old Banks
+                </label>
+            </div>
+        </div>
+        
+        <div class="scenario-group">
+            <h4>Service Radius Distance</h4>
+            <div class="control-group">
+                <label>
+                    <input type="radio" name="radiusDistance" value="0.5" id="radiusHalfMile" checked>
+                    0.5 Mile Radius
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="radio" name="radiusDistance" value="1" id="radiusOneMile">
+                    1 Mile Radius
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="radio" name="radiusDistance" value="2" id="radiusTwoMile">
+                    2 Mile Radius (Pharmacy)
+                </label>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Location List -->
+    <div class="location-list">
+        <h3>Location Directory</h3>
+        <div class="location-categories">
+            <div class="location-category">
+                <h4>Grocery Stores</h4>
+                <ul id="groceryList">
+                    <li>Safeway Lake City - 12318 15th Ave NE, Seattle, WA 98125</li>
+                    <li>QFC Roosevelt - 7300 Roosevelt Way NE, Seattle, WA 98115</li>
+                    <li>QFC Lake City - Lake City area</li>
+                    <li>PCC Green Lake - 7504 Aurora Ave N, Seattle, WA 98103</li>
+                    <li>Trader Joe's Capitol Hill - 1700 E Madison St, Seattle, WA 98122</li>
+                    <li>Whole Foods South Lake Union - 2210 Westlake Ave, Seattle, WA 98121</li>
+                    <li>Uwajimaya International District - 600 5th Ave S, Seattle, WA 98104</li>
+                </ul>
+            </div>
+            <div class="location-category">
+                <h4>Pharmacies</h4>
+                <ul id="pharmacyList">
+                    <li>Rite Aid Wedgwood - 8500 35th Ave NE, Seattle, WA 98115</li>
+                    <li>QFC Pharmacy Lake City - Lake City area</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Address Input Form -->
+    <div class="address-form">
+        <h3>Add Proposed Location</h3>
+        <form id="locationForm">
+            <div class="form-group">
+                <label for="addressInput">Address:</label>
+                <input type="text" id="addressInput" placeholder="Enter address (e.g., 123 Main St, Seattle, WA)" required>
+            </div>
+            <div class="form-group">
+                <label>Service Type:</label>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" id="isGrocery">
+                        Grocery Store
+                    </label>
+                    <label>
+                        <input type="checkbox" id="isPharmacy">
+                        Pharmacy
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="locationName">Location Name:</label>
+                <input type="text" id="locationName" placeholder="Enter location name" required>
+            </div>
+            <button type="submit">Add to Map</button>
+        </form>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        // Initialize map centered on Lake City
+        const map = L.map('map').setView([47.7225, -122.292], 14);
+        
+        // Add tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors',
+            maxZoom: 19
+        }).addTo(map);
+        
+        // Layer groups
+        const baselineGroceries = L.layerGroup();
+        const baselinePharmacies = L.layerGroup();
+        const currentGroceries = L.layerGroup();
+        const currentPharmacies = L.layerGroup();
+        const additionalGroceries = L.layerGroup();
+        const additionalPharmacies = L.layerGroup();
+        const farmersMarkets = L.layerGroup();
+        const smallGroceries = L.layerGroup();
+        const potentialSites = L.layerGroup();
+        const groceryServiceRadius = L.layerGroup();
+        const pharmacyServiceRadius = L.layerGroup();
+        const interimPharmacies = L.layerGroup();
+        const mobilePharmacy = L.layerGroup();
+        const pccCoopGrocery = L.layerGroup();
+        const cornerStoreSolutions = L.layerGroup();
+        const seattleAreaOverlay = L.layerGroup();
+        const closedStores = L.layerGroup();
+        
+        // Load and display data
+        async function loadMapData() {
+            try {
+                // Load baseline groceries
+                const baselineGroceriesResponse = await fetch('/data/baseline_groceries.geojson');
+                const baselineGroceriesData = await baselineGroceriesResponse.json();
+                
+                L.geoJSON(baselineGroceriesData, {
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 8,
+                            fillColor: '#059669',
+                            color: '#047857',
+                            weight: 0, pane: 'overlayPane',
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const props = feature.properties;
+                        layer.bindPopup(`
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 8px 0; color: #333;">${props.name}</h3>
+                                <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> ${props.status}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Address:</strong> ${props.address}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Type:</strong> ${props.type}</p>
+                                ${props.note ? `<p style="margin: 4px 0; color: #666;"><strong>Note:</strong> ${props.note}</p>` : ''}
+                            </div>
+                        `);
+                    }
+                }).addTo(baselineGroceries);
+                
+                // Load baseline pharmacies
+                const baselinePharmaciesResponse = await fetch('/data/baseline_pharmacies.geojson');
+                const baselinePharmaciesData = await baselinePharmaciesResponse.json();
+                
+                L.geoJSON(baselinePharmaciesData, {
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 6,
+                            fillColor: '#7c3aed',
+                            color: '#6d28d9',
+                            weight: 0, pane: 'overlayPane',
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const props = feature.properties;
+                        layer.bindPopup(`
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 8px 0; color: #333;">${props.name}</h3>
+                                <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> ${props.status}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Address:</strong> ${props.address}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Type:</strong> ${props.type}</p>
+                                ${props.note ? `<p style="margin: 4px 0; color: #666;"><strong>Note:</strong> ${props.note}</p>` : ''}
+                            </div>
+                        `);
+                    }
+                }).addTo(baselinePharmacies);
+                
+                // Load current groceries
+                const currentGroceriesResponse = await fetch('/data/groceries_current.geojson');
+                const currentGroceriesData = await currentGroceriesResponse.json();
+                
+                L.geoJSON(currentGroceriesData, {
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 8,
+                            fillColor: '#059669',
+                            color: '#047857',
+                            weight: 0, pane: 'overlayPane',
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const props = feature.properties;
+                        layer.bindPopup(`
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 8px 0; color: #333;">${props.name}</h3>
+                                <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> ${props.status}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Address:</strong> ${props.address}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Type:</strong> ${props.type}</p>
+                                ${props.note ? `<p style="margin: 4px 0; color: #666;"><strong>Note:</strong> ${props.note}</p>` : ''}
+                            </div>
+                        `);
+                    }
+                }).addTo(currentGroceries);
+                
+                // Load current pharmacies
+                const currentPharmaciesResponse = await fetch('/data/pharmacies_current.geojson');
+                const currentPharmaciesData = await currentPharmaciesResponse.json();
+                
+                L.geoJSON(currentPharmaciesData, {
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 6,
+                            fillColor: '#7c3aed',
+                            color: '#6d28d9',
+                            weight: 0, pane: 'overlayPane',
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const props = feature.properties;
+                        layer.bindPopup(`
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 8px 0; color: #333;">${props.name}</h3>
+                                <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> ${props.status}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Address:</strong> ${props.address}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Type:</strong> ${props.type}</p>
+                                ${props.note ? `<p style="margin: 4px 0; color: #666;"><strong>Note:</strong> ${props.note}</p>` : ''}
+                            </div>
+                        `);
+                    }
+                }).addTo(currentPharmacies);
+                
+                // Load additional grocery stores
+                const additionalGroceriesResponse = await fetch('/data/additional_groceries.geojson');
+                const additionalGroceriesData = await additionalGroceriesResponse.json();
+                
+                L.geoJSON(additionalGroceriesData, {
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 8,
+                            fillColor: '#059669',
+                            color: '#047857',
+                            weight: 0, pane: 'overlayPane',
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const props = feature.properties;
+                        layer.bindPopup(`
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 8px 0; color: #333;">${props.name}</h3>
+                                <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> ${props.status}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Address:</strong> ${props.address}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Type:</strong> ${props.type}</p>
+                                ${props.note ? `<p style="margin: 4px 0; color: #666;"><strong>Note:</strong> ${props.note}</p>` : ''}
+                            </div>
+                        `);
+                    }
+                }).addTo(additionalGroceries);
+                
+                // Load additional pharmacies
+                const additionalPharmaciesResponse = await fetch('/data/additional_pharmacies.geojson');
+                const additionalPharmaciesData = await additionalPharmaciesResponse.json();
+                
+                L.geoJSON(additionalPharmaciesData, {
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 6,
+                            fillColor: '#7c3aed',
+                            color: '#6d28d9',
+                            weight: 0, pane: 'overlayPane',
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const props = feature.properties;
+                        layer.bindPopup(`
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 8px 0; color: #333;">${props.name}</h3>
+                                <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> ${props.status}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Address:</strong> ${props.address}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Type:</strong> ${props.type}</p>
+                                ${props.note ? `<p style="margin: 4px 0; color: #666;"><strong>Note:</strong> ${props.note}</p>` : ''}
+                            </div>
+                        `);
+                    }
+                }).addTo(additionalPharmacies);
+                
+                // Service radius circles will be added dynamically based on visible services
+                
+                // Load interim pharmacies
+                const interimPharmaciesResponse = await fetch('/data/interim_pharmacies.geojson');
+                const interimPharmaciesData = await interimPharmaciesResponse.json();
+                
+                L.geoJSON(interimPharmaciesData, {
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 6,
+                            fillColor: '#f59e0b',
+                            color: '#d97706',
+                            weight: 0, pane: 'overlayPane',
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const props = feature.properties;
+                        layer.bindPopup(`
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 8px 0; color: #333;">${props.name}</h3>
+                                <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> ${props.status}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Type:</strong> ${props.type}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Address:</strong> ${props.address}</p>
+                                ${props.note ? `<p style="margin: 4px 0; color: #666;"><strong>Note:</strong> ${props.note}</p>` : ''}
+                            </div>
+                        `);
+                    }
+                }).addTo(interimPharmacies);
+                
+                // Load mobile pharmacy
+                const mobilePharmacyResponse = await fetch('/data/mobile_pharmacy.geojson');
+                const mobilePharmacyData = await mobilePharmacyResponse.json();
+                
+                L.geoJSON(mobilePharmacyData, {
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 6,
+                            fillColor: '#f59e0b',
+                            color: '#d97706',
+                            weight: 0, pane: 'overlayPane',
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const props = feature.properties;
+                        layer.bindPopup(`
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 8px 0; color: #333;">${props.name}</h3>
+                                <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> ${props.status}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Type:</strong> ${props.type}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Address:</strong> ${props.address}</p>
+                                ${props.note ? `<p style="margin: 4px 0; color: #666;"><strong>Note:</strong> ${props.note}</p>` : ''}
+                            </div>
+                        `);
+                    }
+                }).addTo(mobilePharmacy);
+                
+                // Load PCC/Co-op grocery
+                const pccCoopResponse = await fetch('/data/pcc_coop_grocery.geojson');
+                const pccCoopData = await pccCoopResponse.json();
+                
+                L.geoJSON(pccCoopData, {
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 8,
+                            fillColor: '#f59e0b',
+                            color: '#d97706',
+                            weight: 0, pane: 'overlayPane',
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const props = feature.properties;
+                        layer.bindPopup(`
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 8px 0; color: #333;">${props.name}</h3>
+                                <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> ${props.status}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Type:</strong> ${props.type}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Address:</strong> ${props.address}</p>
+                                ${props.note ? `<p style="margin: 4px 0; color: #666;"><strong>Note:</strong> ${props.note}</p>` : ''}
+                            </div>
+                        `);
+                    }
+                }).addTo(pccCoopGrocery);
+                
+                // Load corner store solutions
+                const cornerStoreResponse = await fetch('/data/corner_store_solutions.geojson');
+                const cornerStoreData = await cornerStoreResponse.json();
+                
+                L.geoJSON(cornerStoreData, {
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 8,
+                            fillColor: '#f59e0b',
+                            color: '#d97706',
+                            weight: 0, pane: 'overlayPane',
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const props = feature.properties;
+                        layer.bindPopup(`
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 8px 0; color: #333;">${props.name}</h3>
+                                <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> ${props.status}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Type:</strong> ${props.type}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Address:</strong> ${props.address}</p>
+                                ${props.note ? `<p style="margin: 4px 0; color: #666;"><strong>Note:</strong> ${props.note}</p>` : ''}
+                            </div>
+                        `);
+                    }
+                }).addTo(cornerStoreSolutions);
+                
+                // Load potential sites
+                const potentialSitesResponse = await fetch('/data/potential_sites.geojson');
+                const potentialSitesData = await potentialSitesResponse.json();
+                
+                L.geoJSON(potentialSitesData, {
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 8,
+                            fillColor: '#f59e0b',
+                            color: '#d97706',
+                            weight: 2,
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const props = feature.properties;
+                        layer.bindPopup(`
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 8px 0; color: #333;">Site ${props.site_number}: ${props.name}</h3>
+                                <p style="margin: 4px 0; color: #666;"><strong>Type:</strong> ${props.type}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Address:</strong> ${props.address}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> ${props.status}</p>
+                                ${props.note ? `<p style="margin: 4px 0; color: #666;"><strong>Note:</strong> ${props.note}</p>` : ''}
+                            </div>
+                        `);
+                    }
+                }).addTo(potentialSites);
+                
+                // Load closed stores
+                const closedStoresResponse = await fetch('/data/closed_stores.geojson');
+                const closedStoresData = await closedStoresResponse.json();
+                
+                L.geoJSON(closedStoresData, {
+                    pointToLayer: function(feature, latlng) {
+                        const props = feature.properties;
+                        const isPharmacy = props.category.toLowerCase().includes('pharmacy');
+                        const isGrocery = props.category.toLowerCase().includes('grocery');
+                        
+                        let color = '#6b7280'; // Default gray
+                        let radius = 6;
+                        
+                        if (isPharmacy && isGrocery) {
+                            color = '#dc2626'; // Red for both
+                            radius = 8;
+                        } else if (isPharmacy) {
+                            color = '#7c3aed'; // Purple for pharmacy
+                        } else if (isGrocery) {
+                            color = '#059669'; // Green for grocery
+                        }
+                        
+                        return L.circleMarker(latlng, {
+                            radius: radius,
+                            fillColor: color,
+                            color: color,
+                            weight: 2,
+                            opacity: 0.8,
+                            fillOpacity: 0.6,
+                            dashArray: '5, 5' // Dashed border to indicate closed
+                        });
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const props = feature.properties;
+                        layer.bindPopup(`
+                            <div style="font-family: Arial, sans-serif;">
+                                <h3 style="margin: 0 0 8px 0; color: #333;">${props.name}</h3>
+                                <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> <span style="color: #dc2626;">CLOSED</span></p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Category:</strong> ${props.category}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Closed Date:</strong> ${props.closed_date}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Neighborhood:</strong> ${props.neighborhood}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Notes:</strong> ${props.notes}</p>
+                                <p style="margin: 4px 0; color: #666;"><strong>Sources:</strong> ${props.sources}</p>
+                            </div>
+                        `);
+                    }
+                }).addTo(closedStores);
+                
+                // Create Lake City area overlay (light red background)
+                // Using exact coordinates from GeoJSON: NE 95th to NE 145th, 15th Ave NE to Lake Washington
+                const lakeCityCoords = [
+                    [-122.3125, 47.6990], // Southwest corner (15th Ave NE, NE 95th)
+                    [-122.2700, 47.6990], // Southeast corner (Lake Washington, NE 95th)
+                    [-122.2700, 47.7346], // Northeast corner (Lake Washington, NE 145th)
+                    [-122.3125, 47.7346], // Northwest corner (15th Ave NE, NE 145th)
+                    [-122.3125, 47.6990]  // Close the polygon
+                ];
+                
+                console.log('Creating Lake City polygon with coordinates:', lakeCityCoords);
+                
+                const lakeCityPolygon = L.polygon(lakeCityCoords, {
+                    color: '#ff0000',
+                    fillColor: '#ffcccc',
+                    fillOpacity: 0.8,
+                    weight: 5,
+                    opacity: 1,
+                    pane: 'mapPane'
+                }).bindPopup(`
+                    <div style="font-family: Arial, sans-serif;">
+                        <h3 style="margin: 0 0 8px 0; color: #333;">Lake City Area</h3>
+                        <p style="margin: 4px 0; color: #666;">Northeast Seattle neighborhood</p>
+                        <p style="margin: 4px 0; color: #666;">NE 95th to NE 145th, 15th Ave NE to Lake Washington</p>
+                        <p style="margin: 4px 0; color: #666;"><strong>Focus Area:</strong> Service analysis and potential deserts</p>
+                        <p style="margin: 4px 0; color: #666;">Light red areas indicate potential service gaps</p>
+                    </div>
+                `);
+                
+                console.log('Lake City polygon created:', lakeCityPolygon);
+                lakeCityPolygon.addTo(seattleAreaOverlay);
+                console.log('Lake City polygon added to seattleAreaOverlay');
+                
+                // Add a test marker at Lake City center to verify coordinates
+                const lakeCityCenter = L.marker([47.7168, -122.29125], {
+                    icon: L.divIcon({
+                        className: 'test-marker',
+                        html: '<div style="background: red; color: white; padding: 5px; border-radius: 50%; font-weight: bold;">LC</div>',
+                        iconSize: [30, 30]
+                    })
+                }).bindPopup('Lake City Center Test Marker').addTo(map);
+                console.log('Test marker added at Lake City center');
+                
+                // Add default layers
+                seattleAreaOverlay.addTo(map);
+                console.log('seattleAreaOverlay added to map, layer count:', seattleAreaOverlay.getLayers().length);
+                console.log('Map bounds:', map.getBounds());
+                currentGroceries.addTo(map);
+                currentPharmacies.addTo(map);
+                
+                // Add service radius for current services
+                updateServiceRadius();
+                
+                console.log('All data loaded successfully');
+                
+            } catch (error) {
+                console.error('Error loading map data:', error);
+            }
+        }
+        
+        // Function to update service radius circles based on visible services
+        function updateServiceRadius() {
+            // Clear existing service radius circles completely
+            groceryServiceRadius.clearLayers();
+            pharmacyServiceRadius.clearLayers();
+            
+            // Get selected radius distance
+            const radiusDistance = document.querySelector('input[name="radiusDistance"]:checked').value;
+            let radiusMeters, pharmacyColor;
+            
+            if (radiusDistance === '0.5') {
+                radiusMeters = 804; // 0.5 mile = 804m
+                pharmacyColor = '#7c3aed'; // Purple for 0.5 mile
+            } else if (radiusDistance === '1') {
+                radiusMeters = 1609; // 1 mile = 1609m
+                pharmacyColor = '#7c3aed'; // Purple for 1 mile
+            } else if (radiusDistance === '2') {
+                radiusMeters = 3219; // 2 mile = 3219m
+                pharmacyColor = '#eab308'; // Yellow for 2 mile pharmacy
+            }
+            
+            // Check which services are visible and add appropriate radius circles
+            const baselineGroceriesVisible = document.getElementById('baselineGroceriesToggle').checked;
+            const baselinePharmaciesVisible = document.getElementById('baselinePharmaciesToggle').checked;
+            const currentGroceriesVisible = document.getElementById('currentGroceriesToggle').checked;
+            const currentPharmaciesVisible = document.getElementById('currentPharmaciesToggle').checked;
+            const additionalVisible = document.getElementById('additionalGroceriesToggle').checked;
+            const interimVisible = document.getElementById('interimPharmacyToggle').checked;
+            const mobileVisible = document.getElementById('mobilePharmacyToggle').checked;
+            const pccVisible = document.getElementById('pccCoopToggle').checked;
+            const cornerVisible = document.getElementById('cornerStoreToggle').checked;
+            
+            // Add grocery service radius circles
+            if (baselineGroceriesVisible) {
+                // Fred Meyer (grocery) - green circles
+                L.circle([47.722992, -122.292937], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane', pane: 'overlayPane'}).addTo(groceryServiceRadius);
+                // Safeway (grocery) - green circles
+                L.circle([47.7188, -122.3125], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane', pane: 'overlayPane'}).addTo(groceryServiceRadius);
+            } else if (currentGroceriesVisible) {
+                // Safeway (grocery) - green circles
+                L.circle([47.7188, -122.3125], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+                L.circle([47.7188, -122.3125], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+            }
+            
+            if (additionalVisible) {
+                // Additional grocery stores - green circles
+                L.circle([47.6822, -122.3175], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius); // QFC Roosevelt
+                L.circle([47.6822, -122.3175], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+                L.circle([47.73401992422958, -122.31031358412748], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius); // QFC Lake City
+                L.circle([47.73401992422958, -122.31031358412748], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+                L.circle([47.6833, -122.3448], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius); // PCC Green Lake
+                L.circle([47.6833, -122.3448], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+                L.circle([47.6156, -122.3103], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius); // Trader Joe's
+                L.circle([47.6156, -122.3103], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+                L.circle([47.6186, -122.3381], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius); // Whole Foods
+                L.circle([47.6186, -122.3381], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+                L.circle([47.5972, -122.3272], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius); // Uwajimaya
+                L.circle([47.5972, -122.3272], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+            }
+            
+            if (pccVisible) {
+                // PCC/Co-op (grocery) - green circles
+                L.circle([47.7240, -122.2960], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+                L.circle([47.7240, -122.2960], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+            }
+            
+            if (cornerVisible) {
+                // Corner stores (grocery) - green circles
+                L.circle([47.722992, -122.292937], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+                L.circle([47.722992, -122.292937], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+                L.circle([47.722, -122.298], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+                L.circle([47.722, -122.298], {radius: radiusMeters, color: '#059669', fillColor: '#059669', fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(groceryServiceRadius);
+            }
+            
+            // Add pharmacy service radius circles
+            if (baselinePharmaciesVisible) {
+                // Fred Meyer Pharmacy - purple circles
+                L.circle([47.722992, -122.292937], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+                L.circle([47.722992, -122.292937], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+                // Walgreens - purple circles
+                L.circle([47.720, -122.295], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+                L.circle([47.720, -122.295], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+                // Bartell - purple circles
+                L.circle([47.722, -122.298], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+                L.circle([47.722, -122.298], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+                // Rite Aid - purple circles
+                L.circle([47.6904, -122.2915], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+                L.circle([47.6904, -122.2915], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+            } else if (currentPharmaciesVisible) {
+                // Rite Aid - purple circles
+                L.circle([47.6904, -122.2915], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+                L.circle([47.6904, -122.2915], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+            }
+            
+            if (interimVisible) {
+                // Neighborcare Pharmacy - purple circles
+                L.circle([47.7200, -122.3000], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+                L.circle([47.7200, -122.3000], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+                // Bartell Interim Pharmacy - purple circles
+                L.circle([47.722, -122.298], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+                L.circle([47.722, -122.298], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+            }
+            
+            if (mobileVisible) {
+                // Mobile Pharmacy - purple circles
+                L.circle([47.7208, -122.2970], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+                L.circle([47.7208, -122.2970], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+            }
+            
+            // Add QFC Lake City pharmacy service radius if additional groceries are visible
+            if (additionalVisible) {
+                // QFC Lake City Pharmacy - purple circles
+                L.circle([47.73401992422958, -122.31031358412748], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+                L.circle([47.73401992422958, -122.31031358412748], {radius: radiusMeters, color: pharmacyColor, fillColor: pharmacyColor, fillOpacity: 0.05, weight: 0, pane: 'overlayPane'}).addTo(pharmacyServiceRadius);
+            }
+            
+            // Add service radius layers to map
+            groceryServiceRadius.addTo(map);
+            pharmacyServiceRadius.addTo(map);
+        }
+        
+        // Load the data
+        loadMapData();
+        
+        // Add toggle functionality
+        function setupToggleControls() {
+            const toggles = {
+                baselineGroceriesToggle: [baselineGroceries],
+                baselinePharmaciesToggle: [baselinePharmacies],
+                currentGroceriesToggle: [currentGroceries],
+                currentPharmaciesToggle: [currentPharmacies],
+                additionalGroceriesToggle: [additionalGroceries],
+                additionalPharmaciesToggle: [additionalPharmacies],
+                farmersMarketsToggle: [farmersMarkets],
+                smallGroceriesToggle: [smallGroceries],
+                potentialSitesToggle: [potentialSites],
+                closedStoresToggle: [closedStores],
+                interimPharmacyToggle: [interimPharmacies],
+                mobilePharmacyToggle: [mobilePharmacy],
+                pccCoopToggle: [pccCoopGrocery],
+                cornerStoreToggle: [cornerStoreSolutions]
+            };
+            
+            Object.keys(toggles).forEach(toggleId => {
+                const checkbox = document.getElementById(toggleId);
+                const layers = toggles[toggleId];
+                
+                checkbox.addEventListener('change', function() {
+                    layers.forEach(layer => {
+                        if (this.checked) {
+                            layer.addTo(map);
+                        } else {
+                            map.removeLayer(layer);
+                        }
+                    });
+                    // Update service radius when services change
+                    updateServiceRadius();
+                    updateImpactStats();
+                });
+            });
+            
+            // Add radius distance radio button listeners
+            document.querySelectorAll('input[name="radiusDistance"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    updateServiceRadius();
+                });
+            });
+        }
+        
+        // Update impact statistics
+        function updateImpactStats() {
+            const baselineGroceriesVisible = document.getElementById('baselineGroceriesToggle').checked;
+            const baselinePharmaciesVisible = document.getElementById('baselinePharmaciesToggle').checked;
+            const currentGroceriesVisible = document.getElementById('currentGroceriesToggle').checked;
+            const currentPharmaciesVisible = document.getElementById('currentPharmaciesToggle').checked;
+            const additionalVisible = document.getElementById('additionalGroceriesToggle').checked;
+            const additionalPharmaciesVisible = document.getElementById('additionalPharmaciesToggle').checked;
+            const interimVisible = document.getElementById('interimPharmacyToggle').checked;
+            const mobileVisible = document.getElementById('mobilePharmacyToggle').checked;
+            const pccVisible = document.getElementById('pccCoopToggle').checked;
+            const cornerVisible = document.getElementById('cornerStoreToggle').checked;
+            
+            let currentCount = 0;
+            let proposedCount = 0;
+            
+            if (baselineGroceriesVisible) {
+                currentCount += 2; // Fred Meyer + Safeway
+            } else if (currentGroceriesVisible) {
+                currentCount += 1; // Safeway
+            }
+            
+            if (additionalVisible) {
+                currentCount += 6; // QFC Roosevelt, QFC Lake City, PCC, Trader Joe's, Whole Foods, Uwajimaya
+            }
+            
+            if (baselinePharmaciesVisible) {
+                currentCount += 4; // Fred Meyer Pharmacy + Walgreens + Bartell + Rite Aid
+            } else if (currentPharmaciesVisible) {
+                currentCount += 1; // Rite Aid
+            }
+            
+            if (additionalPharmaciesVisible) {
+                currentCount += 1; // QFC Lake City Pharmacy
+            }
+            
+            if (interimVisible) proposedCount += 2; // Neighborcare + Bartell interim
+            if (mobileVisible) proposedCount += 1; // Mobile pharmacy
+            if (pccVisible) proposedCount += 1; // PCC/Co-op
+            if (cornerVisible) proposedCount += 2; // Two corner stores
+            
+            document.getElementById('currentStats').textContent = `Current: ${currentCount} services`;
+            document.getElementById('proposedStats').textContent = `Proposed: +${proposedCount} services`;
+            
+            if (proposedCount > 0) {
+                document.getElementById('solutionImpact').textContent = `Solutions reduce desert areas significantly`;
+            } else {
+                document.getElementById('solutionImpact').textContent = `Toggle solutions to see impact`;
+            }
+        }
+        
+        // Collapsible functionality
+        function toggleControls() {
+            const content = document.getElementById('controlsContent');
+            const btn = document.querySelector('.controls-header .collapse-btn');
+            
+            if (content.classList.contains('collapsed')) {
+                content.classList.remove('collapsed');
+                btn.textContent = '−';
+            } else {
+                content.classList.add('collapsed');
+                btn.textContent = '+';
+            }
+        }
+        
+        function toggleLegend() {
+            const content = document.getElementById('legendContent');
+            const btn = document.querySelector('.legend-header .collapse-btn');
+            
+            if (content.classList.contains('collapsed')) {
+                content.classList.remove('collapsed');
+                btn.textContent = '−';
+            } else {
+                content.classList.add('collapsed');
+                btn.textContent = '+';
+            }
+        }
+        
+        // Setup controls after data loads
+        setTimeout(setupToggleControls, 1000);
+        
+        // Address form functionality
+        document.getElementById('locationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const address = document.getElementById('addressInput').value;
+            const locationName = document.getElementById('locationName').value;
+            const isGrocery = document.getElementById('isGrocery').checked;
+            const isPharmacy = document.getElementById('isPharmacy').checked;
+            
+            if (!isGrocery && !isPharmacy) {
+                alert('Please select at least one service type (Grocery Store or Pharmacy)');
+                return;
+            }
+            
+            try {
+                // Use Nominatim API for geocoding
+                const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`);
+                const data = await response.json();
+                
+                if (data.length === 0) {
+                    alert('Address not found. Please try a different address.');
+                    return;
+                }
+                
+                const lat = parseFloat(data[0].lat);
+                const lon = parseFloat(data[0].lon);
+                
+                // Add markers to map
+                if (isGrocery) {
+                    const groceryMarker = L.circleMarker([lat, lon], {
+                        radius: 8,
+                        fillColor: '#059669',
+                        color: '#047857',
+                        weight: 2,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                    }).addTo(map);
+                    
+                    groceryMarker.bindPopup(`
+                        <div style="font-family: Arial, sans-serif;">
+                            <h3 style="margin: 0 0 8px 0; color: #333;">${locationName}</h3>
+                            <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> Proposed</p>
+                            <p style="margin: 4px 0; color: #666;"><strong>Address:</strong> ${address}</p>
+                            <p style="margin: 4px 0; color: #666;"><strong>Type:</strong> Grocery Store</p>
+                        </div>
+                    `);
+                }
+                
+                if (isPharmacy) {
+                    const pharmacyMarker = L.circleMarker([lat, lon], {
+                        radius: 6,
+                        fillColor: '#7c3aed',
+                        color: '#6d28d9',
+                        weight: 2,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                    }).addTo(map);
+                    
+                    pharmacyMarker.bindPopup(`
+                        <div style="font-family: Arial, sans-serif;">
+                            <h3 style="margin: 0 0 8px 0; color: #333;">${locationName}</h3>
+                            <p style="margin: 4px 0; color: #666;"><strong>Status:</strong> Proposed</p>
+                            <p style="margin: 4px 0; color: #666;"><strong>Address:</strong> ${address}</p>
+                            <p style="margin: 4px 0; color: #666;"><strong>Type:</strong> Pharmacy</p>
+                        </div>
+                    `);
+                }
+                
+                // Add to location list
+                if (isGrocery) {
+                    const groceryList = document.getElementById('groceryList');
+                    const li = document.createElement('li');
+                    li.textContent = `${locationName} - ${address}`;
+                    groceryList.appendChild(li);
+                }
+                
+                if (isPharmacy) {
+                    const pharmacyList = document.getElementById('pharmacyList');
+                    const li = document.createElement('li');
+                    li.textContent = `${locationName} - ${address}`;
+                    pharmacyList.appendChild(li);
+                }
+                
+                // Clear form
+                document.getElementById('locationForm').reset();
+                
+                // Center map on new location
+                map.setView([lat, lon], 15);
+                
+            } catch (error) {
+                console.error('Error geocoding address:', error);
+                alert('Error finding address. Please try again.');
+            }
+        });
+        
+        // Add some debugging
+        map.on('load', () => {
+            console.log('Map loaded successfully');
+            const center = map.getCenter();
+            console.log('Map center:', center.lat, center.lng);
+            console.log('Map zoom:', map.getZoom());
+        });
+        
+        map.on('tileerror', (e) => {
+            console.warn('Tile error:', e);
+        });
+        
+        // Log map state on move/zoom
+        map.on('moveend zoomend', () => {
+            const center = map.getCenter();
+            console.log('Map state:', { 
+                center: [center.lat, center.lng], 
+                zoom: map.getZoom() 
+            });
+        });
+    </script>
+</body>
+</html>

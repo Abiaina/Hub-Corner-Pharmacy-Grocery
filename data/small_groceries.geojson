@@ -1,0 +1,49 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lake City Grocery",
+        "type": "small-grocery",
+        "status": "current",
+        "address": "12700 Lake City Way NE, Seattle, WA 98125",
+        "note": "Small neighborhood grocery store"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.298, 47.722] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Wedgwood Grocery",
+        "type": "small-grocery",
+        "status": "current",
+        "address": "8200 35th Ave NE, Seattle, WA 98115",
+        "note": "Small neighborhood grocery store"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2900, 47.6850] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Roosevelt Grocery",
+        "type": "small-grocery",
+        "status": "current",
+        "address": "7200 Roosevelt Way NE, Seattle, WA 98115",
+        "note": "Small neighborhood grocery store"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3180, 47.6800] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Greenwood Grocery",
+        "type": "small-grocery",
+        "status": "current",
+        "address": "8500 Greenwood Ave N, Seattle, WA 98103",
+        "note": "Small neighborhood grocery store"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3550, 47.6900] }
+    }
+  ]
+}

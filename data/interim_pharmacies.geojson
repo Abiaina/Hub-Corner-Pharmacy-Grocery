@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Neighborcare Pharmacy",
+        "type": "clinic-pharmacy",
+        "status": "interim",
+        "address": "TBD - Neighborcare Health Center",
+        "note": "Interim pharmacy at community health center"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3000, 47.7200] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bartell Interim Pharmacy",
+        "type": "pharmacy",
+        "status": "interim",
+        "address": "12500 Lake City Way NE, Seattle, WA 98125",
+        "note": "Interim pharmacy at former Bartell location"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.298, 47.722] }
+    }
+  ]
+}

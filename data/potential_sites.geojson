@@ -1,0 +1,77 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lake City Community Center",
+        "type": "community-center",
+        "status": "potential-site",
+        "address": "12525 28th Ave NE, Seattle, WA 98125",
+        "note": "City-owned community center with space for services",
+        "site_number": 1
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2950, 47.7200] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lake City Library",
+        "type": "library",
+        "status": "potential-site",
+        "address": "12501 28th Ave NE, Seattle, WA 98125",
+        "note": "Public library with community meeting spaces",
+        "site_number": 2
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2970, 47.7208] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Former Fred Meyer Building",
+        "type": "vacant-building",
+        "status": "potential-site",
+        "address": "13000 Lake City Way NE, Seattle, WA 98125",
+        "note": "Large vacant building suitable for hub-spoke model",
+        "site_number": 3
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.292937, 47.722992] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Former Bartell Drugs Building",
+        "type": "vacant-building",
+        "status": "potential-site",
+        "address": "12700 Lake City Way NE, Seattle, WA 98125",
+        "note": "Former pharmacy building, ideal for pharmacy services",
+        "site_number": 4
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.298, 47.722] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lake City Farmers Market Site",
+        "type": "market-site",
+        "status": "potential-site",
+        "address": "12525 28th Ave NE, Seattle, WA 98125",
+        "note": "Existing farmers market location for expansion",
+        "site_number": 5
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2950, 47.7200] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Neighborcare Health Center",
+        "type": "health-center",
+        "status": "potential-site",
+        "address": "TBD - Lake City area",
+        "note": "Community health center for integrated pharmacy services",
+        "site_number": 6
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3000, 47.7200] }
+    }
+  ]
+}

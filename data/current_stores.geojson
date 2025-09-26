@@ -1,0 +1,73 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.311915, 47.718018]
+      },
+      "properties": {
+        "name": "Safeway – Pinehurst (15th Ave NE)",
+        "category": "Grocery (with Pharmacy)",
+        "full_grocery": "Yes",
+        "has_pharmacy": "Yes",
+        "address": "12318 15th Ave NE, Seattle, WA 98125",
+        "notes": "Full-line supermarket; in-store pharmacy",
+        "sources": "Providence Directory; Safeway pharmacy page",
+        "status": "current"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.289342, 47.68251]
+      },
+      "properties": {
+        "name": "Safeway – Bryant / Ravenna (35th Ave NE)",
+        "category": "Grocery (with Pharmacy)",
+        "full_grocery": "Yes",
+        "has_pharmacy": "Yes",
+        "address": "7340 35th Ave NE, Seattle, WA 98115",
+        "notes": "Full-line supermarket; in-store pharmacy",
+        "sources": "Providence Directory",
+        "status": "current"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.276751, 47.668087]
+      },
+      "properties": {
+        "name": "Katterman's Sand Point Pharmacy",
+        "category": "Pharmacy",
+        "full_grocery": "No",
+        "has_pharmacy": "Yes",
+        "address": "5400 Sand Point Way NE, Seattle, WA 98105",
+        "notes": "Independent community pharmacy",
+        "sources": "Providence Directory; Katterman's site",
+        "status": "current"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.362602, 47.701515]
+      },
+      "properties": {
+        "name": "QFC – Crown Hill (Holman Rd NW)",
+        "category": "Grocery (with Pharmacy)",
+        "full_grocery": "Yes",
+        "has_pharmacy": "Likely",
+        "address": "9999 Holman Rd NW, Seattle, WA 98117",
+        "notes": "Full-line supermarket; verify pharmacy hours",
+        "sources": "PostOfficeHours locator",
+        "status": "current"
+      }
+    }
+  ]
+}
