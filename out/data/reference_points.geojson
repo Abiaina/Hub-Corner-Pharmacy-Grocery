@@ -1,0 +1,49 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Fred Meyer — Lake City",
+        "type": "supermarket+pharmacy",
+        "status": "current",
+        "address": "13000 Lake City Way NE, Seattle, WA 98125",
+        "note": "Full-line grocery with pharmacy - Closing October 17, 2025"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.292937, 47.722992] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Safeway — Lake City",
+        "type": "supermarket",
+        "status": "current",
+        "address": "12318 15th Ave NE, Seattle, WA 98125",
+        "note": "Standard grocer - remaining option after Fred Meyer closure"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3125, 47.7188] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lake City Library",
+        "type": "reference",
+        "status": "current",
+        "address": "12501 28th Ave NE, Seattle, WA 98125",
+        "note": "Community anchor - potential mobile service location"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2970, 47.7208] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lake City Community Center",
+        "type": "reference",
+        "status": "current",
+        "address": "12531 28th Ave NE, Seattle, WA 98125",
+        "note": "Community hub - potential food hub location"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2968, 47.7205] }
+    }
+  ]
+}

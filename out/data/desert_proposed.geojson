@@ -1,0 +1,19 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Reduced Desert" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.3100, 47.7100],
+          [-122.2850, 47.7100],
+          [-122.2850, 47.7300],
+          [-122.3100, 47.7300],
+          [-122.3100, 47.7100]
+        ]]
+      }
+    }
+  ]
+}

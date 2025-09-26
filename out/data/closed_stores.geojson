@@ -1,0 +1,69 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.29222222222222, 47.73361111111111]
+      },
+      "properties": {
+        "name": "Walgreens – Lake City (14352 Lake City Way NE)",
+        "category": "Pharmacy",
+        "neighborhood": "Lake City (North Seattle)",
+        "closed_date": "Nov 2023",
+        "notes": "Closure announced in local reporting Oct 21, 2023; store subsequently closed in November 2023.",
+        "sources": "Shoreline Area News 2023-10-21; Yelp listing shows CLOSED; MapQuest listing shows Permanently closed",
+        "status": "closed"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.291963, 47.724082]
+      },
+      "properties": {
+        "name": "Fred Meyer – Lake City",
+        "category": "Grocery (with Pharmacy)",
+        "neighborhood": "Lake City (North Seattle)",
+        "closed_date": "Oct 2025",
+        "notes": "Full-line supermarket with pharmacy; closed October 2025",
+        "sources": "Community reports",
+        "status": "closed"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.2915, 47.6904]
+      },
+      "properties": {
+        "name": "Rite Aid – Wedgwood (8500 35th Ave NE)",
+        "category": "Pharmacy",
+        "neighborhood": "Wedgwood (NE Seattle)",
+        "closed_date": "2025 (announced)",
+        "notes": "Listed among WA closures during bankruptcy",
+        "sources": "FOX 13 Seattle",
+        "status": "closed"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.298, 47.722]
+      },
+      "properties": {
+        "name": "Bartell Drugs – Lake City (3018 NE 125th St)",
+        "category": "Pharmacy",
+        "neighborhood": "Lake City (North Seattle)",
+        "closed_date": "Nov 20, 2023",
+        "notes": "Local posts and community reports indicated final day was Nov 20, 2023.",
+        "sources": "Reddit r/Seattle post; Wedgwood FB group post; MapQuest listing shows Permanently closed",
+        "status": "closed"
+      }
+    }
+  ]
+}

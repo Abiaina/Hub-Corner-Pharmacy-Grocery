@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Corner Store - Fred Meyer Site",
+        "type": "corner-store",
+        "status": "proposed",
+        "address": "13000 Lake City Way NE, Seattle, WA 98125",
+        "note": "Corner store at former Fred Meyer location"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.292937, 47.722992] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Corner Store - Bartell Site",
+        "type": "corner-store",
+        "status": "proposed",
+        "address": "12500 Lake City Way NE, Seattle, WA 98125",
+        "note": "Corner store at former Bartell location"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.298, 47.722] }
+    }
+  ]
+}

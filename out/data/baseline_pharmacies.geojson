@@ -1,0 +1,49 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Fred Meyer Pharmacy",
+        "type": "pharmacy",
+        "status": "baseline",
+        "address": "13000 Lake City Way NE, Seattle, WA 98125",
+        "note": "Previously operating (closed Oct 2025)"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.292937, 47.722992] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Walgreens - Lake City",
+        "type": "pharmacy",
+        "status": "baseline",
+        "address": "12700 Lake City Way NE, Seattle, WA 98125",
+        "note": "Previously operating (closed)"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.295, 47.720] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bartell Drugs - Lake City",
+        "type": "pharmacy",
+        "status": "baseline",
+        "address": "12500 Lake City Way NE, Seattle, WA 98125",
+        "note": "Previously operating (closed)"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.298, 47.722] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rite Aid - Wedgwood",
+        "type": "pharmacy",
+        "status": "baseline",
+        "address": "8500 35th Ave NE, Seattle, WA 98115",
+        "note": "Still operating (closing 2025)"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2915, 47.6904] }
+    }
+  ]
+}

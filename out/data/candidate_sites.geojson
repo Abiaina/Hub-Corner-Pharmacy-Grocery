@@ -1,0 +1,158 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "hub_001",
+        "site_type": "hub",
+        "name": "Central Hub - Capitol Hill",
+        "capacity": "large",
+        "services": ["pharmacy", "grocery", "health_clinic"],
+        "description": "Former large pharmacy converted to community hub"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.3200, 47.6200]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "hub_002",
+        "site_type": "hub",
+        "name": "North Hub - Greenwood",
+        "capacity": "large",
+        "services": ["pharmacy", "grocery", "health_clinic", "community_center"],
+        "description": "Repurposed large pharmacy serving North Seattle"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.3600, 47.6900]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "hub_003",
+        "site_type": "hub",
+        "name": "South Hub - Rainier Valley",
+        "capacity": "large",
+        "services": ["pharmacy", "grocery", "health_clinic", "community_center"],
+        "description": "Former large pharmacy converted to community hub"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.2900, 47.5500]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "corner_001",
+        "site_type": "corner_store_pharmacy",
+        "name": "Beacon Hill Grocery-Pharmacy",
+        "capacity": "small",
+        "services": ["fresh_produce", "butcher_goods", "staples", "prescription_pickup", "otc_meds", "telepharmacy"],
+        "description": "Combined grocery-pharmacy corner store serving Beacon Hill",
+        "grocery_items": ["fresh_produce", "dairy", "meat", "bread", "canned_goods"],
+        "pharmacy_services": ["prescriptions", "otc_medications", "health_consultations", "vaccinations"],
+        "walking_distance": "0.3 miles from nearest hub"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.3100, 47.5800]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "corner_002",
+        "site_type": "corner_store_pharmacy",
+        "name": "Ballard Grocery-Pharmacy",
+        "capacity": "small",
+        "services": ["fresh_produce", "butcher_goods", "staples", "prescription_pickup", "otc_meds", "telepharmacy"],
+        "description": "Combined grocery-pharmacy corner store serving Ballard",
+        "grocery_items": ["fresh_produce", "dairy", "meat", "bread", "canned_goods"],
+        "pharmacy_services": ["prescriptions", "otc_medications", "health_consultations", "vaccinations"],
+        "walking_distance": "0.4 miles from nearest hub"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.3800, 47.6700]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "corner_003",
+        "site_type": "corner_store_pharmacy",
+        "name": "Central District Grocery-Pharmacy",
+        "capacity": "small",
+        "services": ["fresh_produce", "butcher_goods", "staples", "prescription_pickup", "otc_meds", "telepharmacy"],
+        "description": "Combined grocery-pharmacy corner store serving Central District",
+        "grocery_items": ["fresh_produce", "dairy", "meat", "bread", "canned_goods"],
+        "pharmacy_services": ["prescriptions", "otc_medications", "health_consultations", "vaccinations"],
+        "walking_distance": "0.2 miles from nearest hub"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.3000, 47.6000]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "corner_004",
+        "site_type": "corner_store_pharmacy",
+        "name": "West Seattle Grocery-Pharmacy",
+        "capacity": "small",
+        "services": ["fresh_produce", "butcher_goods", "staples", "prescription_pickup", "otc_meds", "telepharmacy"],
+        "description": "Combined grocery-pharmacy corner store serving West Seattle",
+        "grocery_items": ["fresh_produce", "dairy", "meat", "bread", "canned_goods"],
+        "pharmacy_services": ["prescriptions", "otc_medications", "health_consultations", "vaccinations"],
+        "walking_distance": "0.5 miles from nearest hub"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.4000, 47.5700]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "corner_005",
+        "site_type": "corner_store_pharmacy",
+        "name": "Rainier Beach Grocery-Pharmacy",
+        "capacity": "small",
+        "services": ["fresh_produce", "butcher_goods", "staples", "prescription_pickup", "otc_meds", "telepharmacy"],
+        "description": "Combined grocery-pharmacy corner store serving Rainier Beach",
+        "grocery_items": ["fresh_produce", "dairy", "meat", "bread", "canned_goods"],
+        "pharmacy_services": ["prescriptions", "otc_medications", "health_consultations", "vaccinations"],
+        "walking_distance": "0.3 miles from nearest hub"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.2800, 47.5200]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "corner_006",
+        "site_type": "corner_store_pharmacy",
+        "name": "Fremont Grocery-Pharmacy",
+        "capacity": "small",
+        "services": ["fresh_produce", "butcher_goods", "staples", "prescription_pickup", "otc_meds", "telepharmacy"],
+        "description": "Combined grocery-pharmacy corner store serving Fremont",
+        "grocery_items": ["fresh_produce", "dairy", "meat", "bread", "canned_goods"],
+        "pharmacy_services": ["prescriptions", "otc_medications", "health_consultations", "vaccinations"],
+        "walking_distance": "0.4 miles from nearest hub"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.3500, 47.6500]
+      }
+    }
+  ]
+}

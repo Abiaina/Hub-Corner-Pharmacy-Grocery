@@ -1,0 +1,38 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Community Co-op (Proposed)",
+        "status": "proposed",
+        "type": "grocery-coop",
+        "address": "Lake City Way NE — candidate site",
+        "note": "Member-owned grocery store"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2960, 47.7240] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Food Hub Market",
+        "status": "proposed",
+        "type": "food-hub",
+        "address": "Near Lake City Community Center",
+        "note": "Fresh produce and essentials"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2980, 47.7180] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mobile Grocery Service",
+        "status": "proposed",
+        "type": "mobile-grocery",
+        "address": "Various locations",
+        "note": "Weekly mobile grocery stops"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3020, 47.7120] }
+    }
+  ]
+}
