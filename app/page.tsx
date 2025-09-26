@@ -30,7 +30,7 @@ export default function Page() {
               </div>
             </a>
             
-            <a href="/Hub-Corner-Pharmacy-Grocery/solutions.html" className="inline-block p-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg hover:from-purple-100 hover:to-pink-100 transition-colors border-2 border-purple-200 shadow-lg">
+            <a href="/solutions.html" className="inline-block p-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg hover:from-purple-100 hover:to-pink-100 transition-colors border-2 border-purple-200 shadow-lg">
               <div className="text-center">
                 <div className="text-4xl font-bold text-purple-600 mb-4">Solutions</div>
                 <h3 className="font-semibold text-purple-800 text-xl mb-3">Implementation Options</h3>

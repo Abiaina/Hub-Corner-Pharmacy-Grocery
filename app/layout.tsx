@@ -12,10 +12,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen bg-gray-50 text-gray-900">
         <header className="sticky top-0 z-10 bg-white/80 backdrop-blur border-b">
           <nav className="mx-auto max-w-6xl px-4 py-3 flex items-center gap-6">
-            <a href="/Hub-Corner-Pharmacy-Grocery/" className="font-bold">Lake City Access Map</a>
-            <a href="/Hub-Corner-Pharmacy-Grocery/enhanced-map.html" className="hover:underline">Map Analysis</a>
-            <a href="/Hub-Corner-Pharmacy-Grocery/solutions.html" className="hover:underline">Solutions</a>
-            <a href="/Hub-Corner-Pharmacy-Grocery/references.html" className="hover:underline">References</a>
+            <a href="/" className="font-bold">Lake City Access Map</a>
+            <a href="/enhanced-map.html" className="hover:underline">Map Analysis</a>
+            <a href="/solutions.html" className="hover:underline">Solutions</a>
+            <a href="/references.html" className="hover:underline">References</a>
           </nav>
         </header>
         <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
