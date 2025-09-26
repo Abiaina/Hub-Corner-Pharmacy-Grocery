@@ -1,0 +1,38 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lake City Farmers Market",
+        "type": "farmers-market",
+        "status": "current",
+        "address": "12525 28th Ave NE, Seattle, WA 98125",
+        "note": "Weekly farmers market"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2950, 47.7200] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "University District Farmers Market",
+        "type": "farmers-market",
+        "status": "current",
+        "address": "University Way NE & NE 50th St, Seattle, WA 98105",
+        "note": "Year-round farmers market"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3030, 47.6600] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Capitol Hill Farmers Market",
+        "type": "farmers-market",
+        "status": "current",
+        "address": "Broadway & E Pine St, Seattle, WA 98122",
+        "note": "Weekly farmers market"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3200, 47.6100] }
+    }
+  ]
+}

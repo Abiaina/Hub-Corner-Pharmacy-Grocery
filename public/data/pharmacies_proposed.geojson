@@ -1,0 +1,38 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Neighborcare Proposed Pharmacy",
+        "status": "proposed",
+        "type": "clinic-pharmacy",
+        "address": "TBD — Neighborcare/partner clinic",
+        "note": "Community health center pharmacy"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3000, 47.7200] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mobile Pharmacy Stop",
+        "status": "proposed",
+        "type": "mobile-pharmacy-stop",
+        "address": "Near Lake City Library",
+        "note": "Weekly mobile pharmacy service"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2970, 47.7208] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Community Pharmacy Co-op",
+        "status": "proposed",
+        "type": "pharmacy-coop",
+        "address": "Lake City Way NE — candidate site",
+        "note": "Member-owned pharmacy"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2950, 47.7150] }
+    }
+  ]
+}

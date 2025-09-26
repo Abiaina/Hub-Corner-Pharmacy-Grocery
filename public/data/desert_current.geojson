@@ -1,0 +1,19 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Current Desert" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.3200, 47.7050],
+          [-122.2750, 47.7050],
+          [-122.2750, 47.7350],
+          [-122.3200, 47.7350],
+          [-122.3200, 47.7050]
+        ]]
+      }
+    }
+  ]
+}

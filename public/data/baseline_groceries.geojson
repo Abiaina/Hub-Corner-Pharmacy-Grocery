@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Fred Meyer - Lake City",
+        "type": "supermarket",
+        "status": "baseline",
+        "address": "13000 Lake City Way NE, Seattle, WA 98125",
+        "note": "Previously operating (closed Oct 2025)"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.292937, 47.722992] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Safeway Lake City",
+        "type": "supermarket",
+        "status": "baseline",
+        "address": "12318 15th Ave NE, Seattle, WA 98125",
+        "note": "Still operating"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3125, 47.7188] }
+    }
+  ]
+}

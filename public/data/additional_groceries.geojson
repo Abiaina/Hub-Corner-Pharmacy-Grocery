@@ -1,0 +1,71 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "QFC - Roosevelt",
+        "type": "supermarket",
+        "status": "current",
+        "address": "7300 Roosevelt Way NE, Seattle, WA 98115",
+        "note": "Full-service grocery store"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3175, 47.6822] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "QFC - Lake City",
+        "type": "supermarket",
+        "status": "current",
+        "address": "Lake City area",
+        "note": "Full-service grocery store with pharmacy"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.31031358412748, 47.73401992422958] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "PCC Community Markets - Green Lake",
+        "type": "grocery-coop",
+        "status": "current",
+        "address": "7504 Aurora Ave N, Seattle, WA 98103",
+        "note": "Community co-op grocery store"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3448, 47.6833] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trader Joe's - Capitol Hill",
+        "type": "supermarket",
+        "status": "current",
+        "address": "1700 E Madison St, Seattle, WA 98122",
+        "note": "Specialty grocery store"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3103, 47.6156] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Whole Foods - South Lake Union",
+        "type": "supermarket",
+        "status": "current",
+        "address": "2210 Westlake Ave, Seattle, WA 98121",
+        "note": "Premium grocery store"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3381, 47.6186] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Uwajimaya - International District",
+        "type": "supermarket",
+        "status": "current",
+        "address": "600 5th Ave S, Seattle, WA 98104",
+        "note": "Asian specialty grocery store"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.3272, 47.5972] }
+    }
+  ]
+}

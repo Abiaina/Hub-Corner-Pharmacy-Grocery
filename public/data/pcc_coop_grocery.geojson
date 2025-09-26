@@ -1,0 +1,16 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "PCC Community Markets - Lake City",
+        "type": "grocery-coop",
+        "status": "proposed",
+        "address": "Lake City Way NE - candidate site",
+        "note": "PCC-style community co-op grocery store"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2960, 47.7240] }
+    }
+  ]
+}

@@ -1,85 +1,84 @@
 export default function Page() {
   return (
-    <div className="space-y-6">
-      <section className="card">
-        <h1 className="text-3xl font-semibold mb-4">Hub-Spoke Model for Community Access</h1>
-        <p className="text-lg text-gray-700 mb-6">
-          A conceptual framework for improving food and pharmacy access through repurposed large pharmacies as community hubs 
-          and corner store-pharmacy hybrids, creating a sustainable network that serves underserved communities.
+    <div>
+      {/* Header with Navigation */}
+      <header className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-8 px-6 text-center shadow-lg">
+        <h1 className="text-4xl font-light mb-3">Lake City Grocery & Pharmacy Desert & Solutions</h1>
+        <p className="text-xl opacity-90 mb-6">
+          Enhanced service area analysis for grocery and pharmacy access in Lake City, Seattle and solutions to address the gaps
         </p>
+      </header>
+
+      <div className="space-y-6 p-6">
+        <section className="card">
+          <h2 className="text-2xl font-semibold mb-4">Explore Our Analysis</h2>
+          <p className="text-lg text-gray-700 mb-6">
+            Interactive tools and comprehensive solutions for addressing grocery and pharmacy access gaps in Lake City.
+          </p>
         
-        <div className="grid md:grid-cols-3 gap-6">
-          <a href="/pilot" className="block p-6 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-600 mb-3">🏥</div>
-              <h3 className="font-semibold text-purple-800 text-lg mb-2">Hub-Spoke Framework</h3>
-              <p className="text-sm text-purple-600">Core concept and implementation strategy for community access</p>
-            </div>
-          </a>
-          
-          <a href="/examples" className="block p-6 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-600 mb-3">🌍</div>
-              <h3 className="font-semibold text-green-800 text-lg mb-2">State Examples</h3>
-              <p className="text-sm text-green-600">Successful models from other states and communities</p>
-            </div>
-          </a>
-          
-          <a href="/references" className="block p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-3">📚</div>
-              <h3 className="font-semibold text-blue-800 text-lg mb-2">References</h3>
-              <p className="text-sm text-blue-600">Research, case studies, and policy documentation</p>
-            </div>
-          </a>
-        </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <a href="/enhanced-map.html" className="inline-block p-8 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg hover:from-green-100 hover:to-blue-100 transition-colors border-2 border-green-200 shadow-lg">
+              <div className="text-center">
+                <div className="text-4xl font-bold text-green-600 mb-4">Map</div>
+                <h3 className="font-semibold text-green-800 text-xl mb-3">Enhanced Service Area Analysis</h3>
+                <p className="text-green-600 mb-4 text-sm">Interactive map with scenario toggles</p>
+                <div className="text-xs text-gray-600 space-y-1">
+                  <p>• Distance-based deserts</p>
+                  <p>• Service radius toggles</p>
+                  <p>• Potential sites</p>
+                </div>
+              </div>
+            </a>
+            
+            <a href="/solutions.html" className="inline-block p-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg hover:from-purple-100 hover:to-pink-100 transition-colors border-2 border-purple-200 shadow-lg">
+              <div className="text-center">
+                <div className="text-4xl font-bold text-purple-600 mb-4">Solutions</div>
+                <h3 className="font-semibold text-purple-800 text-xl mb-3">Implementation Options</h3>
+                <p className="text-purple-600 mb-4 text-sm">Short-term and long-term solutions</p>
+                <div className="text-xs text-gray-600 space-y-1">
+                  <p>• Interim pharmacy services</p>
+                  <p>• Hub-spoke model</p>
+                  <p>• Co-op development</p>
+                </div>
+              </div>
+            </a>
+          </div>
       </section>
 
-      <section className="card">
-        <h2 className="text-xl font-semibold mb-4">Hub-Spoke Model Components</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="text-center p-4 bg-purple-50 rounded-lg">
-            <div className="text-2xl font-bold text-purple-600 mb-2">🏥</div>
-            <div className="font-semibold text-purple-800 mb-2">Community Hubs</div>
-            <div className="text-sm text-gray-600">Repurposed large pharmacies serving as central distribution and service points</div>
-          </div>
-          
-          <div className="text-center p-4 bg-green-50 rounded-lg">
-            <div className="text-2xl font-bold text-green-600 mb-2">🏪</div>
-            <div className="font-semibold text-green-800 mb-2">Corner Store Hybrids</div>
-            <div className="text-sm text-gray-600">Existing corner stores enhanced with pharmacy services and fresh food</div>
-          </div>
-          
-          <div className="text-center p-4 bg-blue-50 rounded-lg">
-            <div className="text-2xl font-bold text-blue-600 mb-2">🚚</div>
-            <div className="font-semibold text-blue-800 mb-2">Distribution Network</div>
-            <div className="text-sm text-gray-600">Efficient supply chain connecting hubs to corner stores and communities</div>
+      <section className="card bg-slate-50 border-slate-300">
+        <h2 className="text-xl font-semibold mb-4 text-slate-800">Executive Summary — Address Lake City Critical Service Loss (Grocery & Pharmacy))</h2>
+        <div className="mb-4">
+          <p className="text-lg font-semibold text-slate-800 mb-2">
+            Lake City area lost 3 pharmacies (Walgreens, Bartell, Fred Meyer) and full-line grocery (Fred Meyer). These closures create large food & pharmacy deserts in the core of Lake City.
+          </p>
+        </div>
+        
+        <div className="mb-4">
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="bg-white p-4 rounded-lg border-l-4 border-blue-500">
+              <h4 className="font-semibold text-blue-700 mb-2">Interim Pharmacy</h4>
+              <p className="text-sm text-slate-600">
+                Stand up a neighborhood pharmacy that accepts Medicare Part D and Apple Health (Medicaid) immediately, then add commercial plans.
+              </p>
+            </div>
+            <div className="bg-white p-4 rounded-lg border-l-4 border-green-500">
+              <h4 className="font-semibold text-green-700 mb-2">Planning Committee</h4>
+              <p className="text-sm text-slate-600">
+                Resident-Led Planning Committee: choose the permanent grocery + pharmacy model (co-op/PCC, hub-and-spoke, or conventional grocer) and prioritize re-use of existing shells.
+              </p>
+            </div>
+            <div className="bg-white p-4 rounded-lg border-l-4 border-purple-500">
+              <h4 className="font-semibold text-purple-700 mb-2">Policy Changes</h4>
+              <ul className="text-sm text-slate-600 space-y-1">
+                <li>• Ban restrictive covenants on former grocery/pharmacy sites; expedite permits for re-tenanting.</li>
+                <li>• Adopt time-based pharmacy access standards (minutes, not just miles) to reflect Lake City's topography.</li>
+                <li>• Create a pharmacy "Any Willing Provider" state law (plans/PBMs must offer standard terms); ensure QHP network adequacy explicitly includes pharmacies.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
-
-      <section className="card">
-        <h2 className="text-xl font-semibold mb-4">About This Framework</h2>
-        <p className="text-gray-700 mb-4">
-          The hub-spoke model represents an innovative approach to addressing food and pharmacy access disparities 
-          in underserved communities. By leveraging existing infrastructure and creating strategic partnerships, 
-          this model can provide sustainable solutions that benefit both communities and businesses.
-        </p>
-        <p className="text-gray-700 mb-4">
-          <strong>Key Principles:</strong>
-        </p>
-        <ul className="list-disc list-inside text-gray-700 space-y-2">
-          <li>Repurpose existing large pharmacy spaces as community hubs</li>
-          <li>Enhance corner stores with pharmacy services and fresh food options</li>
-          <li>Create efficient distribution networks between hubs and spokes</li>
-          <li>Develop sustainable public-private partnerships</li>
-          <li>Focus on community-centered design and local ownership</li>
-        </ul>
-        <p className="text-gray-700 mt-4">
-          This framework draws from successful models implemented in other states and communities, 
-          adapted for local needs and regulatory environments.
-        </p>
-      </section>
+      </div>
     </div>
   )
 }

@@ -1,0 +1,19 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Lake City, Seattle" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.3200, 47.7100],
+          [-122.2800, 47.7100],
+          [-122.2800, 47.7350],
+          [-122.3200, 47.7350],
+          [-122.3200, 47.7100]
+        ]]
+      }
+    }
+  ]
+}

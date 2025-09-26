@@ -1,153 +1,56 @@
-# Seattle Access Pilot
+# Lake City Access Map
 
-A production-ready Next.js application that compares Seattle food/pharmacy access for 2015 vs 2025, overlays a proposed pilot using repurposed large pharmacies as hubs and corner store-pharmacy hybrids, and includes comprehensive analysis pages.
+A comprehensive web application for analyzing grocery and pharmacy service areas in Lake City, Seattle, with interactive mapping, scenario analysis, and proposed solutions.
 
 ## Tech Stack
 
-- **Next.js 14+** (App Router)
-- **React 18**
-- **TypeScript** (strict mode)
-- **Tailwind CSS 3.x**
-- **Leaflet 1.9** (OpenStreetMap tiles)
-- **Node.js 20.x LTS**
-
-## Getting Started
-
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-2. **Run development server:**
-   ```bash
-   npm run dev
-   ```
-
-3. **Open your browser:**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+- **Frontend**: Next.js 14 with React 18
+- **Styling**: Tailwind CSS
+- **Mapping**: Leaflet.js (HTML/CSS/JS implementation)
+- **Data**: GeoJSON format for geographic data
+- **Deployment**: GitHub Pages
 
 ## Project Structure
 
-### Routes (App Router)
+### Supported Pages
 
 - `/` - Home page with overview and navigation
-- `/seattle-2015-2025` - Interactive map with toggle between 2015, 2025, and proposed pilot
-- `/pilot` - Detailed pilot overview featuring repurposed large pharmacies as hubs and corner store-pharmacy hybrids
-- `/examples` - Examples from other cities and communities
-- `/ppp` - Public-Private Partnership strategies and supply chain analysis
+- `/enhanced-map.html` - Interactive map with scenario toggles and service area analysis
+- `/solutions.html` - Comprehensive solutions for addressing access gaps
+- `/references.html` - Key data, regulations, and resources
 
-### Components
+### Key Features
 
-- `components/MapLeaflet.tsx` - Client component for Leaflet map integration
-- `components/LegendToggle.tsx` - Three-state toggle component (2015/2025/Pilot)
+- **Interactive Mapping**: Distance-based service area analysis with 0.5, 1, and 2-mile radius options
+- **Scenario Toggles**: Compare current state, baseline state, and proposed solutions
+- **Service Area Visualization**: Color-coded circles showing pharmacy and grocery coverage
+- **Lake City Focus**: Specific analysis of Lake City area with potential desert identification
+- **Comprehensive Solutions**: Short-term and long-term approaches including interim pharmacy, co-op development, and hub-spoke models
 
-### Data Files
+### Data Sources
 
-Located in `/public/data/`:
-- `tracts_2015.geojson` - Seattle census tracts with 2015 access data
-- `tracts_2025.geojson` - Seattle census tracts with 2025 access data  
-- `candidate_sites.geojson` - Proposed hub sites (repurposed large pharmacies) and corner store-pharmacy hybrid locations
+- Current grocery stores and pharmacies
+- Recently closed stores (Fred Meyer, Walgreens, Bartell)
+- Proposed interim pharmacy locations
+- Potential sites for new development
+- Lake City boundary and demographic data
 
-## Features
+## Getting Started
 
-### Interactive Mapping
-- Toggle between 2015, 2025, and proposed pilot views
-- Color-coded census tracts showing grocery/pharmacy access
-- Interactive popups with detailed tract information
-- Proposed hub and corner-pharmacy site visualization
+1. Install dependencies: `npm install`
+2. Run development server: `npm run dev`
+3. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-### Data Visualization
-- Access pattern comparison across time periods
-- Population and income demographics
-- Service coverage analysis
-- Implementation timeline and metrics
+## Deployment
 
-### Content Pages
-- Comprehensive pilot overview
-- Case studies from other cities
-- Partnership and funding strategies
-- Risk management and success metrics
-
-## Development
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
-### Node Version
-
-The project uses Node.js 20.x LTS. Use the included `.nvmrc` file:
-
-```bash
-nvm use
-```
-
-## Production Deployment
-
-### GitHub Pages (Static Export)
-
-This project is configured for static export and can be deployed to GitHub Pages:
-
-1. **Enable GitHub Pages:**
-   - Go to your repository Settings → Pages
-   - Source: "GitHub Actions"
-
-2. **Automatic Deployment:**
-   - Push to the `main` branch
-   - The GitHub Actions workflow will automatically build and deploy
-
-3. **Manual Build:**
-   ```bash
-   npm run build
-   ```
-   The static files will be generated in the `out/` directory.
-
-### Local Production
-
-```bash
-npm run build
-npm run start
-```
+The application is configured for GitHub Pages deployment. See `GITHUB_PAGES_SETUP.md` for detailed instructions.
 
 ## Key Features
 
 - **No API Keys Required** - Uses OpenStreetMap tiles
-- **SSR Compatible** - Properly handles server-side rendering
-- **TypeScript Strict** - Full type safety
 - **Responsive Design** - Works on all device sizes
 - **Accessibility** - Semantic HTML and keyboard navigation
 - **Performance Optimized** - Static generation where possible
-
-## Data Schema
-
-### Census Tracts (tracts_2015.geojson, tracts_2025.geojson)
-```json
-{
-  "properties": {
-    "tract_id": "string",
-    "has_grocery": "boolean",
-    "has_pharmacy": "boolean", 
-    "population": "number",
-    "median_income": "number"
-  }
-}
-```
-
-### Candidate Sites (candidate_sites.geojson)
-```json
-{
-  "properties": {
-    "site_id": "string",
-    "site_type": "hub|corner_pharmacy",
-    "name": "string",
-    "capacity": "large|small",
-    "services": ["string"]
-  }
-}
-```
 
 ## License
 

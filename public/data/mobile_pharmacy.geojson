@@ -1,0 +1,16 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mobile Pharmacy - Lake City Library",
+        "type": "mobile-pharmacy",
+        "status": "mobile",
+        "address": "12501 28th Ave NE, Seattle, WA 98125",
+        "note": "Weekly mobile pharmacy service at Lake City Library"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.2970, 47.7208] }
+    }
+  ]
+}

@@ -1,20 +1,24 @@
 {
-  "name": "seattle-access-pilot",
+  "name": "lake-city-access-map",
   "private": true,
+  "engines": {
+    "node": ">=18.17 <21"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build && next export"
+    "export": "next build && next export",
+    "postinstall": "node -e \"const v=process.versions.node.split('.'); if(+v[0]<18||+v[0]>20){console.error('❗Use Node 18–20. See .nvmrc'); process.exit(1)}\""
   },
   "dependencies": {
     "@turf/turf": "^6.5.0",
-    "leaflet": "^1.9.4",
+    "leaflet": "1.9.4",
     "next": "^14.2.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-leaflet": "^4.1.0"
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-leaflet": "4.2.1"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.12",

@@ -1,0 +1,22 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.276751, 47.668087]
+      },
+      "properties": {
+        "name": "Katterman's Sand Point Pharmacy",
+        "category": "Pharmacy",
+        "full_grocery": "No",
+        "has_pharmacy": "Yes",
+        "address": "5400 Sand Point Way NE, Seattle, WA 98105",
+        "notes": "Independent community pharmacy",
+        "sources": "Providence Directory; Katterman's site",
+        "status": "current"
+      }
+    }
+  ]
+}

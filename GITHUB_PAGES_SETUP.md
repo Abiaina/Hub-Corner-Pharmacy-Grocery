@@ -1,20 +1,19 @@
 # GitHub Pages Setup Guide
 
-## Quick Fix for "Get Pages site failed" Error
+## Fix for Permission Denied Error (403)
 
-### Step 1: Enable GitHub Pages Manually
+The error you're seeing is because the GitHub Actions bot doesn't have permission to push to your repository. Here's how to fix it:
+
+### Step 1: Enable GitHub Pages
 
 1. **Go to your repository on GitHub**
 2. **Click "Settings" tab** (at the top of the repository)
 3. **Scroll down to "Pages" section** (in the left sidebar)
 4. **Under "Source":**
-   - Select **"Deploy from a branch"** (temporarily)
-   - Select **"gh-pages"** branch and **"/ (root)"** folder
+   - Select **"GitHub Actions"**
    - Click **"Save"**
-   - Wait 30 seconds, then change back to **"GitHub Actions"**
-   - Click **"Save"** again
 
-### Step 2: Check Repository Permissions
+### Step 2: Fix Repository Permissions
 
 1. **In the same Settings page:**
 2. **Click "Actions" in the left sidebar**
@@ -28,7 +27,7 @@
 
 ```bash
 git add .github/workflows/deploy.yml
-git commit -m "Switch to peaceiris/actions-gh-pages for deployment"
+git commit -m "Switch to official GitHub Pages deployment"
 git push origin main
 ```
 
@@ -36,15 +35,16 @@ git push origin main
 
 1. **Go to "Actions" tab** in your repository
 2. **Click on the latest workflow run**
-3. **Watch the "build-and-deploy" job** - it should now succeed
-4. **The workflow will create a `gh-pages` branch automatically**
+3. **Watch the "build" job** - it should succeed
+4. **Watch the "deploy" job** - it should deploy to Pages
 
 ## What the Updated Workflow Does
 
-The workflow now uses `peaceiris/actions-gh-pages@v3` which:
-- Creates a `gh-pages` branch automatically
-- Pushes the built files to that branch
-- Works with both "Deploy from a branch" and "GitHub Actions" sources
+The workflow now uses GitHub's official Pages deployment actions:
+- `actions/configure-pages@v4` - Sets up Pages
+- `actions/upload-pages-artifact@v3` - Uploads build artifacts
+- `actions/deploy-pages@v4` - Official GitHub Pages deployment
+- No need to create branches or push to repository
 
 ## If It Still Fails
 

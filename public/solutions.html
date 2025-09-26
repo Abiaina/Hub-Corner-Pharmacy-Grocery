@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lake City Solutions - Service Area Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #2563eb, #7c3aed);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+        
+        .header p {
+            margin: 0 0 20px 0;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .header-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        .header-nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .category-section {
+            margin-bottom: 40px;
+        }
+        
+        .category-title {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2563eb;
+        }
+        
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .solution-card.expanded {
+            grid-column: 1 / -1;
+        }
+        
+        .solution-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 5px solid #2563eb;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+        
+        .solution-card.short-term {
+            border-left-color: #10b981;
+        }
+        
+        .solution-card.long-term {
+            border-left-color: #f59e0b;
+        }
+        
+        .solution-title {
+            font-size: 1.4rem;
+            color: #1f2937;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .solution-overview {
+            color: #6b7280;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .solution-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+            width: 100%;
+            max-width: none;
+        }
+        
+        .solution-details.show {
+            display: block;
+        }
+        
+        .detail-section {
+            margin-bottom: 20px;
+        }
+        
+        .detail-section h4 {
+            color: #374151;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .detail-section h5 {
+            color: #4b5563;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+        
+        .detail-section ul {
+            margin-left: 20px;
+            color: #6b7280;
+        }
+        
+        .detail-section li {
+            margin-bottom: 5px;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .two-column .detail-section {
+            margin-bottom: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        .toggle-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .toggle-btn:hover {
+            background: #1d4ed8;
+        }
+        
+        .toggle-btn.expanded {
+            background: #dc2626;
+        }
+        
+        .toggle-btn.expanded:hover {
+            background: #b91c1c;
+        }
+        
+        .pharmacy-note {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #92400e;
+        }
+        
+        @media (max-width: 768px) {
+            .solutions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Lake City Solutions</h1>
+        <p>Comprehensive approaches to improve grocery and pharmacy access</p>
+        <div class="header-nav">
+            <a href="/">Home</a>
+            <a href="/enhanced-map.html">Map Analysis</a>
+            <a href="/solutions.html">Solutions</a>
+            <a href="/references.html">References</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="executive-summary-section" style="background: #f8fafc; border: 2px solid #475569; border-radius: 12px; padding: 25px; margin-bottom: 40px;">
+            <h2 style="color: #1e293b; margin-bottom: 20px; text-align: center;">Executive Summary — Critical Service Loss (Lake City)</h2>
+            
+            <div class="summary-content" style="margin-bottom: 25px;">
+                <p style="font-size: 1.1rem; color: #1e293b; font-weight: bold; margin-bottom: 15px;">
+                    The central Lake City hub on Lake City Way NE lost 3 pharmacies (Walgreens, Bartell, Fred Meyer) and full-line grocery (Fred Meyer). These closures create large food & pharmacy deserts in the core of Lake City.
+                </p>
+            </div>
+            
+            <div class="detail-section">
+                <h4 style="color: #1e293b; margin-bottom: 15px;">Ask</h4>
+                <div class="ask-items" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                        <h5 style="color: #1e40af; margin-bottom: 8px; font-weight: 600;">Interim Pharmacy</h5>
+                        <p style="font-size: 0.95rem; color: #475569;">Stand up a neighborhood pharmacy that accepts Medicare Part D and Apple Health (Medicaid) immediately, then add commercial plans.</p>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #10b981;">
+                        <h5 style="color: #047857; margin-bottom: 8px; font-weight: 600;">Planning Committee</h5>
+                        <p style="font-size: 0.95rem; color: #475569;">Resident-Led Planning Committee: choose the permanent grocery + pharmacy model (co-op/PCC, hub-and-spoke, or conventional grocer) and prioritize re-use of existing shells.</p>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #8b5cf6;">
+                        <h5 style="color: #7c3aed; margin-bottom: 8px; font-weight: 600;">Policy Changes</h5>
+                        <ul style="font-size: 0.95rem; color: #475569; margin: 0; padding-left: 20px;">
+                            <li>Ban restrictive covenants on former grocery/pharmacy sites; expedite permits for re-tenanting.</li>
+                            <li>Adopt time-based pharmacy access standards (minutes, not just miles) to reflect Lake City's topography.</li>
+                            <li>Create a pharmacy "Any Willing Provider" state law (plans/PBMs must offer standard terms); ensure QHP network adequacy explicitly includes pharmacies.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="policy-section" style="background: #f0f9ff; border: 2px solid #0ea5e9; border-radius: 12px; padding: 25px; margin-bottom: 40px;">
+            <h2 style="color: #0c4a6e; margin-bottom: 20px; text-align: center;">Key Laws & Policy Changes Needed</h2>
+            
+            <div class="two-column">
+                <div class="detail-section">
+                    <h4 style="color: #0c4a6e;">Current Laws to Leverage</h4>
+                    <h5>Medicare & Medicaid Coverage</h5>
+                    <ul>
+                        <li><strong>Medicare Part D Any Willing Pharmacy:</strong> Plans must contract with pharmacies meeting standard terms (<a href="https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-423/subpart-C/section-423.120" target="_blank">42 C.F.R. § 423.120</a>)</li>
+                        <li><strong>Medicaid Free Choice:</strong> Beneficiaries may use any qualified provider (<a href="https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-C/part-431/subpart-B/section-431.51" target="_blank">42 C.F.R. § 431.51</a>)</li>
+                        <li><strong>WA Medicaid Contracting:</strong> HCA may open standard contracts for any enrolled pharmacy (<a href="https://app.leg.wa.gov/wac/default.aspx?cite=182-530-6000" target="_blank">WAC 182-530-6000</a>)</li>
+                    </ul>
+                    
+                    <h5>Private Coverage</h5>
+                    <ul>
+                        <li><strong>Pharmacist Services Parity:</strong> Plans must include adequate pharmacists (<a href="https://app.leg.wa.gov/rcw/default.aspx?cite=48.43.094" target="_blank">RCW 48.43.094</a>)</li>
+                        <li><strong>PBM Guardrails (2026):</strong> Anti-steering and reimbursement protections (<a href="https://app.leg.wa.gov/RCW/default.aspx?cite=48.200.310" target="_blank">RCW 48.200.310</a>)</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-section">
+                    <h4 style="color: #0c4a6e;">Policy Changes Needed</h4>
+                    <h5>Land Use & Covenants</h5>
+                    <ul>
+                        <li><strong>Ban Restrictive Covenants:</strong> Make grocery/pharmacy blocking clauses void (Model: <a href="https://bellingham.municipal.codes/BMC/20.10.027" target="_blank">Bellingham BMC 20.10.027</a>)</li>
+                        <li><strong>Zoning Support:</strong> Expedited permits for grocery/pharmacy development</li>
+                    </ul>
+                    
+                    <h5>Pharmacy Network Access</h5>
+                    <ul>
+                        <li><strong>State AWP Law:</strong> Require commercial plans to contract with willing pharmacies (Model: <a href="https://law.justia.com/codes/tennessee/title-56/chapter-7/part-23/section-56-7-2359/" target="_blank">Tennessee T.C.A. § 56-7-2359</a>)</li>
+                        <li><strong>Time-Based Standards:</strong> Minutes-based pharmacy access (Model: <a href="https://codes.findlaw.com/co/title-10-insurance/co-rev-st-sect-10-16-704/" target="_blank">Colorado</a>)</li>
+                        <li><strong>QHP Network Adequacy:</strong> Include pharmacies in time/distance requirements (<a href="https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-B/part-156/subpart-C/section-156.230" target="_blank">45 C.F.R. § 156.230</a>)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-section">
+            <h2 class="category-title">Short-Term Solutions (3-12 months)</h2>
+            <div class="solutions-grid">
+                
+                <div class="solution-card short-term">
+                    <h3 class="solution-title">Interim Pharmacy Services</h3>
+                    <p class="solution-overview">
+                        Establish temporary pharmacy services at existing community health centers or partner locations to provide immediate medication access while longer-term solutions are developed.
+                    </p>
+                    <button class="toggle-btn" onclick="toggleDetails(this)">View Details</button>
+                    <div class="solution-details">
+                        <div class="two-column">
+                            <div class="detail-section">
+                                <h4>Implementation Examples</h4>
+                                <ul>
+                                    <li><strong><a href="https://neighborcare.org/clinics/lake-city/" target="_blank">Neighborcare Health Center</a></strong> integration</li>
+                                    <li><strong>Mobile pharmacy units</strong> at community centers</li>
+                                    <li><strong><a href="http://www.kingcounty.gov/depts/health/locations/north/dental-clinic.aspx" target="_blank">North Seattle Public Health Dental Clinic</a></strong></li>
+                                    <li><strong><a href="https://share.google/RaOcZ19HhWaCVI3zI" target="_blank">Lake City Professional Center</a></strong></li>
+                                    <li>Telepharmacy services</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>Potential Sites</h4>
+                                <ul>
+                                    <li><strong><a href="https://share.google/sbBBRCfRZnD4FEnd3" target="_blank">Former Bartell Drugs Location</a></strong></li>
+                                    <li><strong><a href="https://share.google/JEfVDsplBlCeaEjMH" target="_blank">Former Walgreens Location</a></strong></li>
+                                    <li>Community health centers</li>
+                                    <li>Library-based services</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>Potential Partners</h4>
+                            <ul>
+                                <li><a href="https://neighborcare.org/clinics/lake-city/" target="_blank">Neighborcare Health</a></li>
+                                <li><a href="http://www.kingcounty.gov/depts/health/locations/north/dental-clinic.aspx" target="_blank">Seattle-King County Public Health</a></li>
+                                <li>Community Health Centers</li>
+                                <li>Local pharmacy chains</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="solution-card short-term">
+                    <h3 class="solution-title">Mobile Pharmacy Services</h3>
+                    <p class="solution-overview">
+                        Deploy mobile pharmacy units to serve Lake City residents on a scheduled basis, providing prescription medications and basic health services at convenient community locations.
+                    </p>
+                    <button class="toggle-btn" onclick="toggleDetails(this)">View Details</button>
+                    <div class="solution-details">
+                        <div class="two-column">
+                            <div class="detail-section">
+                                <h4>Implementation Examples</h4>
+                                <ul>
+                                    <li><strong><a href="https://www.evergreentreatment.org/tim/" target="_blank">Evergreen Treatment Services – "Treatment in Motion" (TIM)</a></strong> — Mobile medication units dispensing methadone/buprenorphine with clinical staff (operates in Seattle/King County)</li>
+                                    <li><strong><a href="https://doh.wa.gov/licenses-permits-and-certificates/facilities-z/behavioral-health-agencies-bha/opioid-treatment-program/opioid-treatment-program-otp-mobile-units" target="_blank">WA DOH rule enabling OTP mobile units</a></strong> — State regulations allow opioid treatment programs to add mobile units as extensions of licensed sites</li>
+                                    <li><strong><a href="https://doh.wa.gov/you-and-your-family/care-van-mobile-health-services" target="_blank">WA DOH Care-a-Van (statewide)</a></strong> — Mobile health/vaccination unit partnering with local jurisdictions across Washington</li>
+                                    <li><strong><a href="https://kingcounty.gov/en/dept/dph/health-safety/health-centers-programs-services/health-services-for-the-homeless/healthcare-for-the-homeless/street-medicine" target="_blank">Public Health–Seattle & King County Street Medicine / Mobile Medical</a></strong> — Teams hold "anchor" clinics at shelters/food banks and do street outreach</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>Service Delivery Models</h4>
+                                <ul>
+                                    <li>Mobile pharmacy vans (similar to food trucks)</li>
+                                    <li>Library-based pharmacy services</li>
+                                    <li>Community center pop-up pharmacies</li>
+                                    <li>Senior center pharmacy visits</li>
+                                    <li>Scheduled neighborhood stops</li>
+                                    <li>Emergency medication delivery</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>Potential Partners</h4>
+                            <ul>
+                                <li><a href="https://www.evergreentreatment.org/tim/" target="_blank">Evergreen Treatment Services</a></li>
+                                <li><a href="https://doh.wa.gov/you-and-your-family/care-van-mobile-health-services" target="_blank">WA DOH Care-a-Van</a></li>
+                                <li>Seattle Public Library</li>
+                                <li>Mobile health providers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="solution-card short-term">
+                    <h3 class="solution-title">Expand Farmers Market & Add Indoor Support</h3>
+                    <p class="solution-overview">
+                        Enhance the existing Lake City Farmers Market with extended hours, indoor facilities, and additional vendors to provide more comprehensive food access including basic grocery items.
+                    </p>
+                </div>
+                
+                <div class="solution-card short-term">
+                    <h3 class="solution-title">Expand Foodbank</h3>
+                    <p class="solution-overview">
+                        Enhance existing food bank services in Lake City with expanded hours, mobile pantries, home delivery, and improved access to fresh produce and essential grocery items. Partner with North Helpline and other local food assistance organizations to provide comprehensive food access support.
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="category-section">
+            <h2 class="category-title">Long-Term Solutions (1-3 years)</h2>
+            <div class="solutions-grid">
+                
+                <div class="solution-card long-term">
+                    <h3 class="solution-title">Co-op</h3>
+                    <p class="solution-overview">
+                        Establish a community-owned cooperative grocery store similar to PCC Community Markets, providing high-quality food access with member ownership, community governance, and union representation.
+                    </p>
+                    <button class="toggle-btn" onclick="toggleDetails(this)">View Details</button>
+                    <div class="solution-details">
+                        <div class="detail-section">
+                            <h4>Overview</h4>
+                            <p>Community-owned <strong>full-line grocery co-located with a pharmacy</strong>—one trip for food + medicines. Option for <strong>PCC</strong> to operate if they engage; community provides demand evidence, sites, and city support. Anchors local health, jobs, and food security close to home.</p>
+                        </div>
+                        
+                        <div class="two-column">
+                            <div class="detail-section">
+                                <h4>Benefits</h4>
+                                <h5>Community</h5>
+                                <ul>
+                                    <li>Walkable access to fresh food <strong>and</strong> essential meds</li>
+                                    <li>Living-wage local jobs; shelf space for local producers</li>
+                                    <li>Education space (nutrition, health screenings)</li>
+                                </ul>
+                                
+                                <h5>Financial/Operational</h5>
+                                <ul>
+                                    <li>Pharmacy foot-traffic stabilizes grocery revenue</li>
+                                    <li>City TI support lowers early failure risk</li>
+                                    <li>Member ownership keeps dollars in the neighborhood</li>
+                                </ul>
+                                
+                                <h5>Health</h5>
+                                <ul>
+                                    <li>Vaccines, refills, med-sync, and counseling on site</li>
+                                    <li>Better adherence → better outcomes (especially for seniors, families, chronic conditions)</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>Needs for Success</h4>
+                                <h5>Funding & Policy</h5>
+                                <ul>
+                                    <li>Co-op equity subsidies; TI grants/forgivable loan; fee/tax relief</li>
+                                    <li>SNAP/EBT (and produce incentives) live on day one</li>
+                                    <li>Streamlined permits; confirmed zoning for grocery/pharmacy</li>
+                                </ul>
+                                
+                                <h5>Operations & Partnerships</h5>
+                                <ul>
+                                    <li>Pharmacy partner (licensing, DEA, vaccines, delivery)</li>
+                                    <li>Farmers market + local producers (MOUs/consignment)</li>
+                                    <li>Distributor/vendor relationships; clinic partners for screenings</li>
+                                </ul>
+                                
+                                <h5>Existing Co-ops We Could Partner With</h5>
+                                <ul>
+                                    <li><strong>PCC Community Markets</strong> - Pacific Northwest's largest food co-op
+                                        <ul>
+                                            <li>Multiple locations in Seattle area</li>
+                                            <li>Strong community focus and local sourcing</li>
+                                            <li>Contact: <a href="mailto:reception@pccmarkets.com">reception@pccmarkets.com</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Central Co-op</strong> - Olympia-based cooperative
+                                        <ul>
+                                            <li>Experience with community-owned grocery</li>
+                                            <li>Focus on local and organic products</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Community Food Co-op</strong> - Bellingham cooperative
+                                        <ul>
+                                            <li>Successful expansion model</li>
+                                            <li>Strong community engagement programs</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                
+                                <h5>Co-op Development Resources</h5>
+                                <ul>
+                                    <li><strong>National Cooperative Grocers (NCG)</strong> - Start-up guidance and resources
+                                        <ul>
+                                            <li>Website: <a href="https://www.ncg.coop/joining-ncg-start-up-co-ops" target="_blank">https://www.ncg.coop/joining-ncg-start-up-co-ops</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="pharmacy-note">
+                            <strong>Pharmacy Integration:</strong> In-store pharmacy with vaccines, delivery, counseling room, and med-sync services.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="solution-card long-term">
+                    <h3 class="solution-title">Municipal Grocery Store</h3>
+                    <p class="solution-overview">
+                        Create a publicly-funded grocery store with integrated pharmacy services that provides affordable, healthy food options to Lake City residents. Like <a href="https://azalea-fresh-market.web.app/" target="_blank">Azalea Fresh Market in Atlanta</a>. Operated by the city or a nonprofit organization with union representation and community governance to ensure worker rights and community input in operations.
+                    </p>
+                </div>
+                
+                <div class="solution-card long-term">
+                    <h3 class="solution-title">Hub-Spoke Model</h3>
+                    <p class="solution-overview">
+                        Create a centralized hub (former Fred Meyer) with multiple smaller spoke locations throughout Lake City, providing comprehensive grocery and pharmacy services with efficient distribution and union representation.
+                    </p>
+                    <button class="toggle-btn" onclick="toggleDetails(this)">View Details</button>
+                    <div class="solution-details">
+                        <div class="detail-section">
+                            <h4>Operational Model</h4>
+                            <div class="two-column">
+                                <div class="detail-section">
+                                    <h5>Processing Hubs (Not Public-Facing)</h5>
+                                    <ul>
+                                        <li>Repurpose recently closed pharmacy and grocery facilities</li>
+                                        <li>Handle prescription processing and fulfillment</li>
+                                        <li>Prepare and package fresh produce and grocery items</li>
+                                        <li>Manage inventory and automated restocking</li>
+                                        <li>Coordinate delivery to corner store network</li>
+                                        <li>Provide telepharmacy consultation support</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="detail-section">
+                                    <h5>Corner Stores (Public-Facing)</h5>
+                                    <ul>
+                                        <li>Serve as primary community access points</li>
+                                        <li>Provide prescription pickup and consultation</li>
+                                        <li>Offer fresh produce and grocery essentials</li>
+                                        <li>Host telepharmacy consultation booths</li>
+                                        <li>Receive prepared orders from processing hubs</li>
+                                        <li>Provide community health education and resources</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="two-column">
+                            <div class="detail-section">
+                                <h4>Processing Hub Benefits</h4>
+                                <ul>
+                                    <li>Efficient prescription processing and fulfillment</li>
+                                    <li>Centralized inventory management</li>
+                                    <li>Quality control and testing facilities</li>
+                                    <li>Cost-effective supply chain operations</li>
+                                    <li>Telepharmacy consultation coordination</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>Corner Store Benefits</h4>
+                                <ul>
+                                    <li>Convenient community access points</li>
+                                    <li>Combined grocery and pharmacy services</li>
+                                    <li>Personalized customer service</li>
+                                    <li>Community health education and resources</li>
+                                    <li>Order pickup and preparation services</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>Model Benefits & Advantages</h4>
+                            <h5>Financial Benefits</h5>
+                            <ul>
+                                <li><strong>Distributed Financial Risk:</strong> Multiple smaller corner stores reduce individual location failure risk compared to large single-location investments</li>
+                                <li><strong>Bulk Purchasing Power:</strong> Centralized hubs enable volume discounts on pharmaceuticals, produce, and grocery staples</li>
+                                <li><strong>Operational Efficiency:</strong> Shared processing, storage, and distribution infrastructure reduces per-unit costs</li>
+                                <li><strong>Reduced Real Estate Costs:</strong> Repurposing existing closed facilities eliminates new construction expenses</li>
+                            </ul>
+                            
+                            <h5>Safety & Quality Benefits</h5>
+                            <ul>
+                                <li><strong>Tracking & Recalls:</strong> Centralized inventory management enables rapid identification and removal of recalled products across all locations</li>
+                                <li><strong>Quality Control:</strong> Hub-based testing and inspection ensures consistent product quality before distribution to corner stores</li>
+                                <li><strong>Prescription Safety:</strong> Centralized pharmacy processing reduces medication errors and enables better drug interaction monitoring</li>
+                                <li><strong>Cold Chain Management:</strong> Professional refrigeration and storage at hubs maintains fresh produce and medication integrity</li>
+                            </ul>
+                            
+                            <h5>Community Benefits</h5>
+                            <ul>
+                                <li>Walking-distance access to essential services</li>
+                                <li>Combined grocery-pharmacy convenience</li>
+                                <li>Local job creation and community investment</li>
+                                <li>Telepharmacy consultations for underserved areas</li>
+                                <li>Cultural food options tailored to neighborhoods</li>
+                                <li>Community health education and resources</li>
+                                <li>Reduced transportation barriers for seniors and disabled</li>
+                                <li>Emergency medication and food access</li>
+                                <li>Social connection points in neighborhoods</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>Program Requirements & Implementation Needs</h4>
+                            <h5>Forecasting & Planning Systems</h5>
+                            <ul>
+                                <li><strong>Neighborhood Demand Forecasting:</strong> Data analytics to predict grocery and pharmacy needs by location, season, and demographics</li>
+                                <li><strong>Inventory Optimization:</strong> AI-driven systems to determine optimal stock levels for each corner store based on local consumption patterns</li>
+                                <li><strong>Prescription Demand Modeling:</strong> Predictive analytics for medication needs based on patient populations and chronic condition prevalence</li>
+                                <li><strong>Seasonal Adjustment:</strong> Dynamic inventory management for holiday periods, flu seasons, and weather-related demand spikes</li>
+                            </ul>
+                            
+                            <h5>Frontloading & Distribution</h5>
+                            <ul>
+                                <li><strong>Pre-positioning Strategy:</strong> Advanced delivery of anticipated needs to corner stores before peak demand periods</li>
+                                <li><strong>Hub-to-Store Logistics:</strong> Efficient routing and scheduling for daily/weekly restocking of corner stores</li>
+                                <li><strong>Fresh Produce Pipeline:</strong> Cold chain logistics to deliver fresh produce from hubs to stores within optimal freshness windows</li>
+                                <li><strong>Emergency Restocking:</strong> Rapid response system for unexpected demand surges or supply shortages</li>
+                            </ul>
+                            
+                            <h5>Surplus & Waste Reduction Strategy</h5>
+                            <p>The hub model enables sophisticated management of perishable excess and near-expiration products:</p>
+                            <ul>
+                                <li>Automated systems to identify products approaching expiration across all locations</li>
+                                <li>Coordinated redistribution to food banks, free clinics, and community programs</li>
+                                <li>Dynamic pricing to move products before expiration while maintaining food safety</li>
+                                <li>Partnership networks with local nonprofits for efficient surplus distribution</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="solution-card long-term">
+                    <h3 class="solution-title">Pitch New Grocery Business</h3>
+                    <p class="solution-overview">
+                        Attract new grocery retailers to Lake City through economic incentives, zoning changes, and community support, creating competition and improved access with union representation.
+                    </p>
+                </div>
+                
+                <div class="solution-card long-term">
+                    <h3 class="solution-title">Expand and Improve Existing Stores</h3>
+                    <p class="solution-overview">
+                        Provide support and resources to existing stores to expand their offerings and improve quality. Add pharmacy services and upgrade Grocery Outlet to full grocery status, while adding delivery and improving bus access to QFC and Safeway locations with union representation.
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleDetails(button) {
+            const details = button.nextElementSibling;
+            const card = button.closest('.solution-card');
+            const isExpanded = details.classList.contains('show');
+            
+            if (isExpanded) {
+                details.classList.remove('show');
+                card.classList.remove('expanded');
+                button.textContent = 'View Details';
+                button.classList.remove('expanded');
+            } else {
+                details.classList.add('show');
+                card.classList.add('expanded');
+                button.textContent = 'Hide Details';
+                button.classList.add('expanded');
+            }
+        }
+    </script>
+</body>
+</html>
