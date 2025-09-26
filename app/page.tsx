@@ -1,4 +1,16 @@
+// Helper function to get the correct base path
+function getBasePath() {
+  // In production (GitHub Pages), use the repository name as base path
+  if (process.env.NODE_ENV === 'production') {
+    return '/Hub-Corner-Pharmacy-Grocery'
+  }
+  // In development, use no base path
+  return ''
+}
+
 export default function Page() {
+  const basePath = getBasePath()
+  
   return (
     <div>
       {/* Header with Navigation */}
@@ -17,7 +29,7 @@ export default function Page() {
           </p>
         
           <div className="grid md:grid-cols-2 gap-6">
-            <a href="/enhanced-map.html" className="inline-block p-8 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg hover:from-green-100 hover:to-blue-100 transition-colors border-2 border-green-200 shadow-lg">
+            <a href={`${basePath}/enhanced-map.html`} className="inline-block p-8 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg hover:from-green-100 hover:to-blue-100 transition-colors border-2 border-green-200 shadow-lg">
               <div className="text-center">
                 <div className="text-4xl font-bold text-green-600 mb-4">Map</div>
                 <h3 className="font-semibold text-green-800 text-xl mb-3">Enhanced Service Area Analysis</h3>
@@ -30,7 +42,7 @@ export default function Page() {
               </div>
             </a>
             
-            <a href="/solutions.html" className="inline-block p-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg hover:from-purple-100 hover:to-pink-100 transition-colors border-2 border-purple-200 shadow-lg">
+            <a href={`${basePath}/solutions.html`} className="inline-block p-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg hover:from-purple-100 hover:to-pink-100 transition-colors border-2 border-purple-200 shadow-lg">
               <div className="text-center">
                 <div className="text-4xl font-bold text-purple-600 mb-4">Solutions</div>
                 <h3 className="font-semibold text-purple-800 text-xl mb-3">Implementation Options</h3>
