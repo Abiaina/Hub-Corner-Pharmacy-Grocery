@@ -4,6 +4,8 @@ const nextConfig = {
   ...(process.env.NODE_ENV === 'production' && {
     output: 'export',
     trailingSlash: true,
+    basePath: '/Hub-Corner-Pharmacy-Grocery',
+    assetPrefix: '/Hub-Corner-Pharmacy-Grocery',
   }),
   images: {
     unoptimized: true
